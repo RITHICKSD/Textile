@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuraWeave Studio | Handwoven Textile & Fiber Arts</title>
+  <meta name="description" content="Discover AuraWeave Studio's handwoven wall hangings, custom commission options, weaving classes, organic yarns, and digital fiber art gallery.">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M20 30 Q 35 15, 50 30 T 80 30 M20 50 Q 35 35, 50 50 T 80 50 M20 70 Q 35 55, 50 70 T 80 70' fill='none' stroke='%23c96b4c' stroke-width='6' stroke-linecap='round'/%3E%3Cline x1='30' y1='15' x2='30' y2='85' stroke='%23c96b4c' stroke-width='2' stroke-dasharray='2 4'/%3E%3Cline x1='50' y1='15' x2='50' y2='85' stroke='%23c96b4c' stroke-width='2' stroke-dasharray='2 4'/%3E%3Cline x1='70' y1='15' x2='70' y2='85' stroke='%23c96b4c' stroke-width='2' stroke-dasharray='2 4'/%3E%3C/svg%3E">
+  <!-- Google Fonts: Playfair Display for headers, Outfit for body and interface -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Leaflet Map CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-theme">
+  <!-- Header Portion -->
+  <header class="main-header" id="site-header">
+    <div class="header-container">
+      <!-- Left side: Logo -->
+      <a href="#" class="logo-container" id="logo-link" onclick="switchView('home1')">
+        <div class="logo-symbol">
+          <svg viewBox="0 0 100 100" class="logo-svg" width="40" height="40">
+            <path d="M20 30 Q 35 15, 50 30 T 80 30 M20 50 Q 35 35, 50 50 T 80 50 M20 70 Q 35 55, 50 70 T 80 70" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+            <line x1="30" y1="15" x2="30" y2="85" stroke="currentColor" stroke-width="2" stroke-dasharray="2 4"/>
+            <line x1="50" y1="15" x2="50" y2="85" stroke="currentColor" stroke-width="2" stroke-dasharray="2 4"/>
+            <line x1="70" y1="15" x2="70" y2="85" stroke="currentColor" stroke-width="2" stroke-dasharray="2 4"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">AURAWEAVE</span>
+          <span class="logo-subtitle">FIBER ART STUDIO</span>
+        </div>
+      </a>
+
+      <!-- Center: Navigation -->
+      <nav class="nav-menu" id="nav-navigation">
+        <ul class="nav-list">
+          <!-- Home Dropdown -->
+          <li class="nav-item has-dropdown" id="nav-home-dropdown">
+            <a href="#" class="nav-link dropdown-toggle" id="home-menu-link">Home <i class="fa-solid fa-chevron-down nav-chevron"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="#" class="dropdown-item active" id="link-home1" onclick="switchView('home1')">Home 1</a></li>
+              <li><a href="#" class="dropdown-item" id="link-home2" onclick="switchView('home2')">Home 2</a></li>
+            </ul>
+          </li>
+          <!-- About -->
+          <li class="nav-item">
+            <a href="#" class="nav-link" id="link-about" onclick="switchView('about')">About</a>
+          </li>
+          <!-- Services -->
+          <li class="nav-item">
+            <a href="#" class="nav-link" id="link-services" onclick="switchView('services')">Services</a>
+          </li>
+          <!-- Contact -->
+          <li class="nav-item">
+            <a href="#" class="nav-link" id="link-contact" onclick="switchView('contact')">Contact</a>
+          </li>
+          <!-- Dashboard Dropdown -->
+          <li class="nav-item has-dropdown" id="nav-dashboard-dropdown">
+            <a href="#" class="nav-link dropdown-toggle" id="dashboard-menu-link">Dashboard <i class="fa-solid fa-chevron-down nav-chevron"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="#" class="dropdown-item" id="link-user-dash" onclick="switchView('user-dash')">User Dashboard</a></li>
+              <li><a href="#" class="dropdown-item" id="link-admin-dash" onclick="switchView('admin-dash')">Admin Dashboard</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Right side: Controls -->
+      <div class="header-controls" id="header-control-panel">
+        <!-- Dark/Light Theme Toggle -->
+        <button class="control-btn theme-toggle-btn" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Dark/Light Theme">
+          <i class="fa-solid fa-moon moon-icon"></i>
+          <i class="fa-solid fa-sun sun-icon"></i>
+        </button>
+
+        <!-- LTR/RTL Toggle -->
+        <div class="direction-toggle-btn" id="direction-toggle" onclick="toggleDirection()" title="Switch Layout Direction">
+          <span class="direction-text">LTR</span>
+          <span class="direction-circle-indicator"></span>
+        </div>
+
+        <!-- Login Button -->
+        <button class="login-btn" id="login-button" onclick="openLoginModal()">
+          <i class="fa-solid fa-user-circle"></i>
+          <span>Login</span>
+        </button>
+      </div>
+
+      <!-- Hamburger Toggle Button -->
+      <button class="hamburger-btn" id="mobile-hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle Mobile Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Off-Canvas Sidebar Menu -->
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay" onclick="toggleMobileMenu()">
+    <div class="mobile-menu-drawer" onclick="event.stopPropagation()">
+      <div class="mobile-menu-header">
+        <span class="font-playfair" style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary);">Menu</span>
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Close Mobile Menu">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="mobile-menu-body">
+        <ul class="mobile-nav-list">
+          <!-- Home Section with Accordion -->
+          <li class="mobile-nav-item">
+            <div class="mobile-accordion-toggle" onclick="toggleMobileAccordion(this)">
+              <span>Home</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <ul class="mobile-sub-menu">
+              <li><a href="#" class="mobile-sub-link active" onclick="switchView('home1'); toggleMobileMenu();">Home 1</a></li>
+              <li><a href="#" class="mobile-sub-link" onclick="switchView('home2'); toggleMobileMenu();">Home 2</a></li>
+            </ul>
+          </li>
+          <!-- About -->
+          <li class="mobile-nav-item">
+            <a href="#" class="mobile-nav-link" onclick="switchView('about'); toggleMobileMenu();">About</a>
+          </li>
+          <!-- Services -->
+          <li class="mobile-nav-item">
+            <a href="#" class="mobile-nav-link" onclick="switchView('services'); toggleMobileMenu();">Services</a>
+          </li>
+          <!-- Contact -->
+          <li class="mobile-nav-item">
+            <a href="#" class="mobile-nav-link" onclick="switchView('contact'); toggleMobileMenu();">Contact</a>
+          </li>
+          <!-- Dashboard Section with Accordion -->
+          <li class="mobile-nav-item">
+            <div class="mobile-accordion-toggle" onclick="toggleMobileAccordion(this)">
+              <span>Dashboard</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <ul class="mobile-sub-menu">
+              <li><a href="#" class="mobile-sub-link" onclick="switchView('user-dash'); toggleMobileMenu();">User Dashboard</a></li>
+              <li><a href="#" class="mobile-sub-link" onclick="switchView('admin-dash'); toggleMobileMenu();">Admin Dashboard</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="mobile-menu-divider"></div>
+
+        <!-- Controls inside Hamburger -->
+        <div class="mobile-menu-controls" style="display: flex; align-items: center; justify-content: center; gap: 24px; padding: 12px 0;">
+          <!-- LTR/RTL Toggle -->
+          <div class="direction-toggle-btn" onclick="toggleDirection()" title="Switch Layout Direction" style="margin: 0;">
+            <span class="direction-text">LTR</span>
+            <span class="direction-circle-indicator"></span>
+          </div>
+
+          <!-- Theme Toggle -->
+          <button class="control-btn theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Dark/Light Theme" style="width: 38px; height: 38px; border-radius: var(--radius-round); background-color: var(--bg-secondary); border: 1px solid var(--border-color); cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-primary); margin: 0;">
+            <i class="fa-solid fa-moon moon-icon"></i>
+            <i class="fa-solid fa-sun sun-icon" style="display: none;"></i>
+          </button>
+        </div>
+
+        <div class="mobile-menu-divider"></div>
+
+        <!-- Login Button inside Hamburger -->
+        <button class="btn btn-primary btn-block" onclick="openLoginModal(); toggleMobileMenu();" style="margin-top: 8px;">
+          <i class="fa-solid fa-user-circle" style="margin-right: 8px;"></i> Login
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Views Container -->
+  <main id="main-content-area">
+
+    <!-- HOME 1 VIEW -->
+    <div id="home1-view" class="view-container active">
+      <!-- Section 1: Hero Section (The Loom & Warp) -->
+      <section id="h1-hero" class="sec-hero section-layout">
+        <div class="sec-bg-lines"></div>
+        <div class="container hero-grid">
+          <div class="hero-info animate-fade-in">
+            <span class="hero-tag"><i class="fa-solid fa-scroll"></i> AuraWeave Studio</span>
+            <h1 class="hero-title font-playfair">Woven Stories Written in <span class="highlight-text">Tension & Thread</span></h1>
+            <p class="hero-description">Immerse yourself in our collection of luxury handwoven wall hangings and fiber sculptures. Crafted in our coastal studio using heritage techniques, raw organic textures, and natural botanical dyes.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" onclick="switchView('services')">Explore Services</button>
+              <button class="btn btn-outline" onclick="scrollToElement('h1-collections')">View Gallery</button>
+            </div>
+          </div>
+          <div class="hero-visual animate-slide-in">
+            <div class="textile-art-card glass-card">
+              <img src="t3.webp" alt="AuraWeave Premium Handwoven Loom Art" style="width: 100%; height: 320px; object-fit: cover; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <div class="loom-fiber-swatches">
+                <span class="fiber-label">Studio Yarns:</span>
+                <div class="swatch-list">
+                  <div class="fiber-swatch-item" title="Organic Merino"><span class="swatch-color" style="background-color: #c96b4c;"></span> Merino</div>
+                  <div class="fiber-swatch-item" title="Belgian Linen"><span class="swatch-color" style="background-color: #d79c5c;"></span> Linen</div>
+                  <div class="fiber-swatch-item" title="Raw Jute"><span class="swatch-color" style="background-color: #4b6a5a;"></span> Jute</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Curated Collections (Finished Hangings) -->
+      <section id="h1-collections" class="section-layout">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="subheading">Curated Gallery</span>
+            <h2 class="section-title font-playfair">Finished Wall Hangings</h2>
+            <p class="section-desc">Each textile creation is a one-of-a-kind art piece crafted over weeks on our massive timber frame looms.</p>
+          </div>
+          <div class="card-grid">
+            <div class="art-card" onclick="openInteractiveDetail('Earthy Horizons', 'A dramatic multi-textured hanging utilizing raw organic wool, botanical dyes, and hand-spun jute. Features custom brass hanging bars.')">
+              <div class="art-card-img">
+                <img src="t1.webp" alt="Earthy Horizons Woven Tapestry" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="card-tag">Collection A</div>
+              </div>
+              <div class="art-card-details">
+                <h3 class="art-title">Earthy Horizons</h3>
+                <span class="art-price">$1,450 USD</span>
+                <p class="art-meta">Merino Wool, Linen & Organic Cotton | 36" x 48"</p>
+                <div class="art-actions">
+                  <span class="btn-text">Interact & Customize <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="art-card" onclick="openInteractiveDetail('Monochrome Drift', 'Minimalist architectural installation emphasizing shadow, contrast, and dense pile textures. Woven with thick hand-felted roving.')">
+              <div class="art-card-img">
+                <img src="t2.jpg" alt="Monochrome Drift Woven Tapestry" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="card-tag">Collection B</div>
+              </div>
+              <div class="art-card-details">
+                <h3 class="art-title">Monochrome Drift</h3>
+                <span class="art-price">$1,850 USD</span>
+                <p class="art-meta">Hand-felted Roving & Unspun Linen | 40" x 60"</p>
+                <div class="art-actions">
+                  <span class="btn-text">Interact & Customize <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="art-card" onclick="openInteractiveDetail('Geometric Solstice', 'Modern geometric color blocking combined with intricate plain weave overlays and long organic cotton fringes.')">
+              <div class="art-card-img">
+                <img src="t5.webp" alt="Geometric Solstice Woven Tapestry" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="card-tag">Collection C</div>
+              </div>
+              <div class="art-card-details">
+                <h3 class="art-title">Geometric Solstice</h3>
+                <span class="art-price">$1,200 USD</span>
+                <p class="art-meta">Merino Wool & Botanical Linen | 24" x 36"</p>
+                <div class="art-actions">
+                  <span class="btn-text">Interact & Customize <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: The Artisan's Workshop (Interactive Loom Tour) -->
+      <section id="h1-loom-tour" class="section-layout bg-alt">
+        <div class="container">
+          <div class="interactive-split-grid">
+            <div class="tour-text">
+              <span class="subheading">Heritage Craft</span>
+              <h2 class="section-title font-playfair">How the Magic is Spun</h2>
+              <p>Explore our weaving stages. Select a step to view the loom configuration and artisanal process involved in creating custom fiber art pieces.</p>
+              
+              <ul class="step-selector-list">
+                <li class="step-item active" id="step-btn-1" onclick="selectTourStep(1)">
+                  <span class="step-num">01</span>
+                  <div class="step-meta">
+                    <span class="step-title">Warping the Loom</span>
+                    <span class="step-desc">Tensioning parallel cotton warp threads across the frame.</span>
+                  </div>
+                </li>
+                <li class="step-item" id="step-btn-2" onclick="selectTourStep(2)">
+                  <span class="step-num">02</span>
+                  <div class="step-meta">
+                    <span class="step-title">Weft Interlacing</span>
+                    <span class="step-desc">Passing colored yarns horizontally to build the core design.</span>
+                  </div>
+                </li>
+                <li class="step-item" id="step-btn-3" onclick="selectTourStep(3)">
+                  <span class="step-num">03</span>
+                  <div class="step-meta">
+                    <span class="step-title">Knotting & Tufting</span>
+                    <span class="step-desc">Adding luxurious pile heights and shaggy hand-tied textures.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="tour-visual-panel">
+              <div class="glass-card tour-display-card" id="tour-card">
+                <div class="tour-card-visual" id="tour-visual-content" style="height: 250px; overflow: hidden; border-radius: var(--radius-sm);">
+                  <img src="t7.webp" alt="Warping the Loom" id="tour-step-image" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="tour-card-info">
+                  <h4 class="tour-step-header" id="tour-step-title">Warping the Loom</h4>
+                  <p class="tour-step-text" id="tour-step-desc">Warping is the critical first stage. High-tensile cotton cords are wound meticulously onto the structural steel or wood frame loom, creating the vertical foundation of the tapestry. Equal tension across all warp cords is paramount to prevent distortions in the final wall hanging.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Custom Commission Studio -->
+      <section id="h1-commissions" class="section-layout">
+        <div class="container">
+          <div class="commission-configurator glass-card">
+            <div class="config-header text-center">
+              <span class="subheading">Tailored Art</span>
+              <h2 class="section-title font-playfair">Design Your Commission</h2>
+              <p>Configure a custom wall hanging matching your space's specific measurements and color preferences. Get an instant price estimation.</p>
+            </div>
+            
+            <div class="configurator-grid">
+              <div class="configurator-controls">
+                <!-- Size selectors -->
+                <div class="control-group">
+                  <label class="control-label">Select Size Dimensions</label>
+                  <div class="dim-picker">
+                    <button class="dim-btn active" onclick="updateCommissionPrice(36, 48, this)">Small (36" x 48")</button>
+                    <button class="dim-btn" onclick="updateCommissionPrice(48, 60, this)">Medium (48" x 60")</button>
+                    <button class="dim-btn" onclick="updateCommissionPrice(60, 80, this)">Large (60" x 80")</button>
+                  </div>
+                </div>
+                
+                <!-- Color Palette selection -->
+                <div class="control-group">
+                  <label class="control-label">Choose Yarn Palette Blend</label>
+                  <div class="palette-selectors">
+                    <div class="palette-swatch active" style="background: linear-gradient(to right, #c86a4b, #d99f59, #e8dfd5);" onclick="selectPalette('Desert Sunset', this)"></div>
+                    <div class="palette-swatch" style="background: linear-gradient(to right, #60524c, #e8dfd5, #faf8f5);" onclick="selectPalette('Nordic Frost', this)"></div>
+                    <div class="palette-swatch" style="background: linear-gradient(to right, #4b6a5a, #8fa89b, #e8dfd5);" onclick="selectPalette('Sage Garden', this)"></div>
+                  </div>
+                  <span class="selected-palette-text">Active Selection: <strong id="selected-palette-label">Desert Sunset</strong></span>
+                </div>
+
+                <!-- Textures -->
+                <div class="control-group">
+                  <label class="control-label">Texture Density</label>
+                  <select class="custom-select" id="commission-density" onchange="recalculatePrice()">
+                    <option value="1.0">Standard Flat Weave & Fringe</option>
+                    <option value="1.2">Semi-Textured (Medium Pile Rows)</option>
+                    <option value="1.5">Dense Fiber Sculpted (Heavy Roving knots)</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="configurator-preview">
+                <div class="preview-canvas-container">
+                  <div class="preview-canvas-background" id="preview-art-canvas">
+                    <div class="canvas-fringe" id="canvas-fringe"></div>
+                  </div>
+                </div>
+                
+                <div class="pricing-summary-card">
+                  <div class="price-row">
+                    <span>Estimated Cost:</span>
+                    <strong class="price-value" id="commission-est-price">$1,450 USD</strong>
+                  </div>
+                  <p class="price-disclaimer">Includes solid maple hanging dowel, premium organic botanical fibers, and carbon-neutral shipping.</p>
+                  <button class="btn btn-primary btn-block" onclick="startCommissionRequest()">Book Commission Consult</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Upcoming Weaving Classes -->
+      <section id="h1-classes" class="section-layout bg-alt">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="subheading">Learn the Craft</span>
+            <h2 class="section-title font-playfair">Studio Weaving Schedules</h2>
+            <p class="section-desc">Join our master weavers in the studio for hands-on, multi-day frame loom workshops.</p>
+          </div>
+          
+          <div class="card-grid">
+            <!-- Class Card 1 -->
+            <div class="class-card glass-card">
+              <div class="class-header">
+                <span class="class-badge badge-beginner">Beginner</span>
+                <h3 class="class-title">Intro to Tapestry Weaving</h3>
+              </div>
+              <div class="class-body">
+                <div class="class-meta-item"><i class="fa-solid fa-calendar-days"></i> Sat, June 20th | 10AM - 4PM</div>
+                <div class="class-meta-item"><i class="fa-solid fa-user-tie"></i> Instructor: Clara Gable</div>
+                <div class="class-meta-item"><i class="fa-solid fa-chair"></i> Seats Remaining: <strong>3 of 8</strong></div>
+                <p class="class-description">Learn to warp a copper frame loom, master basic plain weave techniques, color changes, and secure organic fringes. Includes starter kit.</p>
+              </div>
+              <div class="class-footer">
+                <span class="class-price">$180 USD</span>
+                <button class="btn btn-sm btn-primary" onclick="bookClass('Intro to Tapestry Weaving', 180)">Reserve Seat</button>
+              </div>
+            </div>
+
+            <!-- Class Card 2 -->
+            <div class="class-card glass-card">
+              <div class="class-header">
+                <span class="class-badge badge-intermediate">Intermediate</span>
+                <h3 class="class-title">Sculptural Textures & Shag</h3>
+              </div>
+              <div class="class-body">
+                <div class="class-meta-item"><i class="fa-solid fa-calendar-days"></i> Sun, June 21st | 11AM - 5PM</div>
+                <div class="class-meta-item"><i class="fa-solid fa-user-tie"></i> Instructor: Liam Novak</div>
+                <div class="class-meta-item"><i class="fa-solid fa-chair"></i> Seats Remaining: <strong>5 of 6</strong></div>
+                <p class="class-description">Incorporate heavy merino roving, learn rya loops, soumak weaves, and pile shearing techniques to add depth to your woven creations.</p>
+              </div>
+              <div class="class-footer">
+                <span class="class-price">$220 USD</span>
+                <button class="btn btn-sm btn-primary" onclick="bookClass('Sculptural Textures & Shag', 220)">Reserve Seat</button>
+              </div>
+            </div>
+
+            <!-- Class Card 3 -->
+            <div class="class-card glass-card">
+              <div class="class-header">
+                <span class="class-badge badge-advanced">Advanced</span>
+                <h3 class="class-title">Natural Botanicals & Dyeing</h3>
+              </div>
+              <div class="class-body">
+                <div class="class-meta-item"><i class="fa-solid fa-calendar-days"></i> Sat, June 27th | 9AM - 5PM</div>
+                <div class="class-meta-item"><i class="fa-solid fa-user-tie"></i> Instructor: Clara Gable</div>
+                <div class="class-meta-item"><i class="fa-solid fa-chair"></i> Seats Remaining: <strong>2 of 5</strong></div>
+                <p class="class-description">Dye your own yarn skeins using onion skins, avocado seeds, indigo, and weld. Spin and weave your dyed fiber on our heritage floor looms.</p>
+              </div>
+              <div class="class-footer">
+                <span class="class-price">$310 USD</span>
+                <button class="btn btn-sm btn-primary" onclick="bookClass('Natural Botanicals & Dyeing', 310)">Reserve Seat</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Yarn Shop & Materiality -->
+      <section id="h1-yarns" class="section-layout">
+        <div class="container">
+          <div class="materiality-split">
+            <div class="yarn-graphics animate-slide-in">
+              <div class="yarn-visual-container" style="padding: 0; overflow: hidden; border: none; background: none;">
+                <img src="t15.webp" alt="Sustainably Spun Botanical Yarns" style="width: 100%; height: 350px; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--glass-shadow); border: 1px solid var(--border-color);">
+              </div>
+            </div>
+            
+            <div class="yarn-details">
+              <span class="subheading">The Yarn Shop</span>
+              <h2 class="section-title font-playfair">Sustainably Spun Materials</h2>
+              <p>For independent weavers, we offer the same premium fibers used in our custom hangings. Hand-spun and dyed in small batches with local plants, bark, and flowers.</p>
+              
+              <ul class="yarn-features">
+                <li><i class="fa-solid fa-leaf"></i> 100% Organic Merino Wool & Peruvian Cotton</li>
+                <li><i class="fa-solid fa-droplet"></i> Dyed with Madder Root, Marigold, Oak Galls</li>
+                <li><i class="fa-solid fa-infinity"></i> Zero-chemical processing, fully bio-degradable</li>
+              </ul>
+              
+              <div class="yarn-shop-cta">
+                <span class="yarn-price-range">Starting at $24.00 / skein</span>
+                <button class="btn btn-primary" onclick="switchView('services')">View Yarn Catalog</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- HOME 2 VIEW -->
+    <div id="home2-view" class="view-container">
+      <!-- Section 1: Gallery Hero (Art in Threads) -->
+      <section id="h2-hero" class="sec-hero section-layout">
+        <div class="container hero-split-editorial">
+          <div class="editorial-info">
+            <span class="editorial-tag"><i class="fa-solid fa-gem"></i> Gallery Edition</span>
+            <h1 class="editorial-heading font-playfair">Threads of <br>Modern Art</h1>
+            <p class="editorial-desc">Where structural design meets tactile comfort. Highlighting minimalist, bold forms and organic materiality suitable for architectural spaces.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" onclick="switchView('services')">View Installations</button>
+              <button class="btn btn-outline" onclick="scrollToElement('h2-residency')">Explore Residency</button>
+            </div>
+          </div>
+          <div class="editorial-carousel-container">
+            <div class="editorial-slider-frame">
+              <div class="editorial-slider" id="editorial-slider-div">
+                <!-- Slide 1: Abstract Solstice -->
+                <div class="slide active" id="slide-1">
+                  <img src="t10.jpg" alt="Nordic Solstice" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);">
+                  <div class="slide-caption">Nordic Solstice — Linen & Merino</div>
+                </div>
+                <!-- Slide 2: Structural Cross -->
+                <div class="slide" id="slide-2">
+                  <img src="t11.avif" alt="Tectonic Grid" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);">
+                  <div class="slide-caption">Tectonic Grid — Organic Jute</div>
+                </div>
+                <!-- Slide 3: Acoustic Dune -->
+                <div class="slide" id="slide-3">
+                  <img src="t12.jpg" alt="Sage Canopy" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);">
+                  <div class="slide-caption">Sage Canopy — Wool & Linen</div>
+                </div>
+              </div>
+              <div class="carousel-nav">
+                <button class="car-nav-btn" onclick="rotateSlide(-1)"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="car-nav-btn" onclick="rotateSlide(1)"><i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Interactive Virtual Exhibition (Solo Residency) -->
+      <section id="h2-residency" class="section-layout bg-alt">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="subheading">Solo Residency Spotlight</span>
+            <h2 class="section-title font-playfair">Elena Vance: Woven Architecture</h2>
+            <p class="section-desc">Elena's work explores the boundaries between sculpture and structural shelter. Select a piece below to view curatorial notes.</p>
+          </div>
+
+          <div class="residency-grid">
+            <!-- Exhibition piece card options -->
+            <div class="residency-selection-panel">
+              <div class="exhibit-card active" onclick="selectExhibitionItem(1, this)">
+                <img src="t13.avif" alt="Monolithic Shadows" class="exhibit-mini-preview" style="object-fit: cover;">
+                <div class="exhibit-meta">
+                  <h4>Monolithic Shadows</h4>
+                  <span>Piece 01/03</span>
+                </div>
+              </div>
+              <div class="exhibit-card" onclick="selectExhibitionItem(2, this)">
+                <img src="t14.jpg" alt="Tectonic Plates" class="exhibit-mini-preview" style="object-fit: cover;">
+                <div class="exhibit-meta">
+                  <h4>Tectonic Plates</h4>
+                  <span>Piece 02/03</span>
+                </div>
+              </div>
+              <div class="exhibit-card" onclick="selectExhibitionItem(3, this)">
+                <img src="t16.avif" alt="Aether Rhythms" class="exhibit-mini-preview" style="object-fit: cover;">
+                <div class="exhibit-meta">
+                  <h4>Aether Rhythms</h4>
+                  <span>Piece 03/03</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Detail panel -->
+            <div class="glass-card curatorial-detail-card" id="exhibition-curator-panel">
+              <div class="curator-header">
+                <span class="curator-badge">Curator's Notes</span>
+                <h3 class="font-playfair" id="exhibit-item-title">Monolithic Shadows</h3>
+              </div>
+              <p class="curator-description" id="exhibit-item-desc">A deep, dramatic study of high-contrast texture intersections. Using heavy unspun charcoal wool roving woven into structured linen warps, this piece absorbs light and sound, transforming spatial acoustics.</p>
+              <div class="curator-metrics-grid">
+                <div class="metric-item">
+                  <span class="metric-label">Materiality:</span>
+                  <strong id="exhibit-item-materials">Charcoal Roving, Jute & Linen</strong>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Dimensions:</span>
+                  <strong id="exhibit-item-dims">60" x 84"</strong>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Sound Diffusion:</span>
+                  <strong id="exhibit-item-acoustics">NRC 0.90 (Excellent)</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: World Sourcing Map & Botanical Dye Lab -->
+      <section id="h2-fiber-map" class="section-layout">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="subheading">Traceability Laboratory</span>
+            <h2 class="section-title font-playfair">Global Fiber Origins & Botanical Dye Lab</h2>
+            <p class="section-desc">Click origins on the map to trace fiber coordinates, then test natural dye ingredients in our interactive lab.</p>
+          </div>
+
+          <div class="dye-lab-split-grid">
+            <!-- Sourcing Map (Left Column) -->
+            <div class="interactive-map-box glass-card">
+              <h3 class="dye-lab-title"><i class="fa-solid fa-map-location-dot"></i> Sourcing Map</h3>
+              <div class="vector-map-wrapper">
+                <svg viewBox="0 0 800 400" width="100%" height="auto" class="vector-world-map">
+                  <rect width="100%" height="100%" fill="var(--bg-secondary)" rx="12"/>
+                  <!-- Continents Outline -->
+                  <path d="M120 120 Q 180 80, 200 120 T 160 260 T 100 300 Z" fill="var(--bg-tertiary)" opacity="0.6"/>
+                  <path d="M350 100 Q 420 80, 480 140 T 520 280 T 440 320 Z" fill="var(--bg-tertiary)" opacity="0.6"/>
+                  <!-- Sourcing Hotspots -->
+                  <g class="map-hotspot" onclick="showMapTooltip('Peruvian Highlands', 'Ultra-soft Merino Wool, hand-spun by a women-led collective in Peru.')" transform="translate(160, 220)">
+                    <circle r="10" fill="var(--accent-color)" class="pulsing-circle"/>
+                    <circle r="5" fill="#fff"/>
+                  </g>
+                  <g class="map-hotspot" onclick="showMapTooltip('Flanders Fields, Belgium', 'Heavy-weight linen yarn, grown organically and combed for maximum lustre.')" transform="translate(420, 110)">
+                    <circle r="10" fill="var(--accent-color)" class="pulsing-circle"/>
+                    <circle r="5" fill="#fff"/>
+                  </g>
+                  <g class="map-hotspot" onclick="showMapTooltip('Varanasi, India', 'Eco-friendly recycled silk yarn, collected from saree manufacturing surpluses.')" transform="translate(560, 180)">
+                    <circle r="10" fill="var(--accent-color)" class="pulsing-circle"/>
+                    <circle r="5" fill="#fff"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="map-tooltip-box" id="map-tooltip">
+                <strong>Click a pulsing hotspot on the map</strong> to query yarn sourcing and properties.
+              </div>
+            </div>
+
+            <!-- Dye Lab (Right Column) -->
+            <div class="botanical-dye-lab glass-card">
+              <h3 class="dye-lab-title"><i class="fa-solid fa-flask"></i> Botanical Dye Lab</h3>
+              <p class="dye-lab-desc">Select an organic dyestuff to dye our wool bundle on the rack:</p>
+              
+              <div class="dye-lab-selectors">
+                <button class="dye-lab-btn active" onclick="updateDyeLab('Indigo Leaf', '#3d5a80', 'Produces a deep, organic navy blue. Historically used in protective talismans.')">Indigo</button>
+                <button class="dye-lab-btn" onclick="updateDyeLab('Madder Root', '#c96b4c', 'Yields rich terracotta and red hues. Harvested from our organic test garden.')">Madder Root</button>
+                <button class="dye-lab-btn" onclick="updateDyeLab('Marigold Petals', '#d79c5c', 'Yields glowing gold and sunshine yellow tones. Naturally repels wool insects.')">Marigold</button>
+                <button class="dye-lab-btn" onclick="updateDyeLab('Oak Galls', '#60524c', 'Creates complex deep brown and dark grey shades. Rich in protective tannic acid.')">Oak Galls</button>
+              </div>
+
+              <div class="dye-lab-visual-box">
+                <svg viewBox="0 0 200 160" width="100%" height="150" class="dye-skein-svg">
+                  <!-- Skein representation -->
+                  <g id="dye-lab-skein">
+                    <ellipse cx="100" cy="80" rx="28" ry="60" fill="none" stroke="#3d5a80" stroke-width="12" id="skein-color-1" class="dye-transition"/>
+                    <ellipse cx="100" cy="80" rx="16" ry="55" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="6" id="skein-color-2" class="dye-transition"/>
+                    <rect x="75" y="70" width="50" height="20" fill="var(--text-primary)" rx="4"/>
+                  </g>
+                </svg>
+                <div class="dye-fact-box" id="dye-fact-text">
+                  <strong>Indigo Leaf:</strong> Produces a deep, organic navy blue. Historically used in protective talismans.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Acoustic Textile Laboratory (Weave Patterns & Science) -->
+      <section id="h2-acoustics" class="section-layout bg-alt">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="subheading">Tactile Physics</span>
+            <h2 class="section-title font-playfair">Acoustic Soundproofing Laboratory</h2>
+            <p class="section-desc">Our wall tapestries act as structural sound absorbers. Select a weave density pattern below to run the frequency test.</p>
+          </div>
+
+          <div class="acoustic-lab-grid">
+            <div class="acoustic-selectors">
+              <div class="acoustic-card active" onclick="selectAcousticWeave('Plain Basketweave', 'NRC 0.70', 'Flat interwoven pattern providing moderate sound dampening suitable for residential dining spaces.', 'plain', this)">
+                <h4>Plain Basketweave</h4>
+                <span>NRC Rating: 0.70 (Standard)</span>
+              </div>
+              <div class="acoustic-card" onclick="selectAcousticWeave('Twill Weave', 'NRC 0.85', 'Diagonal structural ribs that deflect and trap mid-frequency ambient sounds. Ideal for study spaces.', 'twill', this)">
+                <h4>Twill Rib Weave</h4>
+                <span>NRC Rating: 0.85 (High)</span>
+              </div>
+              <div class="acoustic-card" onclick="selectAcousticWeave('Double Cloth & Rya Tufts', 'NRC 0.95', 'Double-sided heavy weave combined with long organic wool tufts. Absorbs high-frequency echo entirely.', 'tufted', this)">
+                <h4>Double Rya Tufting</h4>
+                <span>NRC Rating: 0.95 (Maximum)</span>
+              </div>
+            </div>
+
+            <div class="glass-card frequency-test-panel">
+              <div class="panel-header">
+                <h4>Frequency Deflection Test</h4>
+                <span class="acoustic-rating-badge" id="acoustic-nrc-label">NRC 0.70</span>
+              </div>
+              
+              <div class="frequency-viz-box">
+                <!-- SVG animated wave mimicking frequency waves flattening out -->
+                <svg viewBox="0 0 400 120" width="100%" height="120" class="freq-svg">
+                  <!-- Wave lines -->
+                  <path d="M 0 60 Q 25 10, 50 60 T 100 60 T 150 60 T 200 60 T 250 60 T 300 60 T 350 60 T 400 60" fill="none" stroke="var(--accent-color)" stroke-width="3" id="freq-wave-1" class="wave-path"/>
+                  <path d="M 0 60 Q 25 90, 50 60 T 100 60 T 150 60 T 200 60 T 250 60 T 300 60 T 350 60 T 400 60" fill="none" stroke="var(--accent-gold)" stroke-width="2" id="freq-wave-2" class="wave-path"/>
+                </svg>
+              </div>
+              <p class="acoustic-description" id="acoustic-pattern-desc">Flat interwoven pattern providing moderate sound dampening suitable for residential dining spaces.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Curated Architectural Showcase (Interactive Installation Mock) -->
+      <section id="h2-installations" class="section-layout">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="subheading">Architectural Spaces</span>
+            <h2 class="section-title font-playfair">Space Visualizer Simulator</h2>
+            <p class="section-desc">Toggle the tapestry overlay in different mock spaces to see how textiles soften and warm architectural spaces.</p>
+          </div>
+
+          <div class="visualizer-grid">
+            <div class="visualizer-controls">
+              <h4>Choose a Space:</h4>
+              <div class="space-selectors">
+                <button class="space-btn active" onclick="selectVisualizerSpace('lobby', this)">Corporate Lobby</button>
+                <button class="space-btn" onclick="selectVisualizerSpace('loft', this)">Residential Loft</button>
+                <button class="space-btn" onclick="selectVisualizerSpace('boardroom', this)">Hotel Boardroom</button>
+              </div>
+              <div class="art-toggle-wrapper">
+                <span>Hang Custom Weaving Art:</span>
+                <label class="switch">
+                  <input type="checkbox" id="visualizer-art-toggle" checked onclick="toggleVisualizerArt()">
+                  <span class="slider-round"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="visualizer-stage glass-card">
+              <!-- SVG rendering of the architectural room -->
+              <svg viewBox="0 0 500 300" width="100%" height="100%" id="visualizer-svg-canvas">
+                <!-- Lobby Background -->
+                <g id="space-lobby-bg">
+                  <rect width="100%" height="100%" fill="#dedad2" id="lobby-wall-color" class="wall-transition"/>
+                  <!-- Pillars -->
+                  <rect x="20" y="0" width="40" height="300" fill="#c5c1b8"/>
+                  <rect x="440" y="0" width="40" height="300" fill="#c5c1b8"/>
+                  <line x1="0" y1="260" x2="500" y2="260" stroke="#8e8980" stroke-width="4"/>
+                </g>
+                <!-- Loft Background (Hidden by default) -->
+                <g id="space-loft-bg" style="display: none;">
+                  <rect width="100%" height="100%" fill="#efeae1" id="loft-wall-color" class="wall-transition"/>
+                  <!-- Brick texture overlay -->
+                  <rect x="400" y="0" width="100%" height="260" fill="#d9c1ac" opacity="0.4"/>
+                  <!-- Window -->
+                  <rect x="40" y="40" width="120" height="180" fill="#e0f0f5" stroke="#a79c93" stroke-width="4"/>
+                  <line x1="100" y1="40" x2="100" y2="220" stroke="#a79c93" stroke-width="2"/>
+                  <line x1="40" y1="130" x2="160" y2="130" stroke="#a79c93" stroke-width="2"/>
+                  <line x1="0" y1="260" x2="500" y2="260" stroke="#8e8980" stroke-width="4"/>
+                </g>
+                <!-- Boardroom Background (Hidden by default) -->
+                <g id="space-boardroom-bg" style="display: none;">
+                  <rect width="100%" height="100%" fill="#cbd3d6" id="boardroom-wall-color" class="wall-transition"/>
+                  <!-- Table -->
+                  <ellipse cx="250" cy="280" rx="180" ry="40" fill="#4d3b32"/>
+                  <!-- Lights -->
+                  <line x1="150" y1="0" x2="150" y2="60" stroke="#8e8980" stroke-width="2"/>
+                  <line x1="350" y1="0" x2="350" y2="60" stroke="#8e8980" stroke-width="2"/>
+                  <circle cx="150" cy="65" r="12" fill="#fffef2" stroke="#8e8980"/>
+                  <circle cx="350" cy="65" r="12" fill="#fffef2" stroke="#8e8980"/>
+                  <line x1="0" y1="260" x2="500" y2="260" stroke="#8e8980" stroke-width="4"/>
+                </g>
+
+                <!-- Tapestry art piece (Toggled dynamically) -->
+                <g id="visualizer-tapestry-art" style="transition: all 0.5s ease; opacity: 1;">
+                  <!-- Art Hanging Frame / Bar -->
+                  <rect x="180" y="60" width="140" height="8" fill="#d79c5c" rx="4"/>
+                  <!-- Tapestry Body -->
+                  <rect x="190" y="68" width="120" height="150" fill="#c96b4c" rx="4" id="visualizer-art-fill" style="transition: fill 0.5s ease;"/>
+                  <!-- Fringes -->
+                  <line x1="195" y1="218" x2="195" y2="235" stroke="#d79c5c" stroke-width="3"/>
+                  <line x1="205" y1="218" x2="205" y2="235" stroke="#d79c5c" stroke-width="3"/>
+                  <line x1="215" y1="218" x2="215" y2="235" stroke="#d79c5c" stroke-width="3"/>
+                  <line x1="225" y1="218" x2="225" y2="235" stroke="#d79c5c" stroke-width="3"/>
+                  <line x1="235" y1="218" x2="235" y2="235" stroke="#d79c5c" stroke-width="3"/>
+                  <line x1="245" y1="218" x2="245" y2="235" stroke="#d79c5c" stroke-width="3"/>
+                  <line x1="255" y1="218" x2="255" y2="235" stroke="#d79c5c" stroke-width="3"/>
+                  <line x1="265" y1="218" x2="265" y2="235" stroke="#d79c5c" stroke-width="3"/>
+                  <line x1="275" y1="218" x2="275" y2="235" stroke="#d79c5c" stroke-width="3"/>
+                  <line x1="285" y1="218" x2="285" y2="235" stroke="#d79c5c" stroke-width="3"/>
+                  <line x1="295" y1="218" x2="295" y2="235" stroke="#d79c5c" stroke-width="3"/>
+                  <line x1="305" y1="218" x2="305" y2="235" stroke="#d79c5c" stroke-width="3"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Collectors Inquiry Form (Curatorial Guild) -->
+      <section id="h2-newsletter" class="section-layout bg-alt">
+        <div class="container">
+          <div class="newsletter-box glass-card">
+            <div class="text-center" style="margin-bottom: 32px;">
+              <h2 class="section-title font-playfair">Collector Inquiry & Guild Registry</h2>
+              <p class="section-desc" style="max-width: 600px; margin: 0 auto;">Join our curatorial circle. Register to receive catalog catalogs, request workshop spots, or coordinate private corporate viewings.</p>
+            </div>
+            
+            <form class="guild-registry-form" onsubmit="handleFormSubmit(event, 'newsletter')">
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label">Collector Name</label>
+                  <input type="text" placeholder="Sarah Connor" required class="form-input">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email Address</label>
+                  <input type="email" placeholder="sarah@example.com" required class="form-input">
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label">Primary Interest</label>
+                  <select class="form-select">
+                    <option>Acquiring Finished Wall Hangings</option>
+                    <option>Corporate Acoustic Commissions</option>
+                    <option>Enrollment in Frame Loom Classes</option>
+                    <option>Receiving Physical catalogs</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Preferred Contact Channel</label>
+                  <select class="form-select">
+                    <option>Email Correspondence</option>
+                    <option>Telephone Scheduling</option>
+                    <option>Studio Visit Appointment</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group" style="display: flex; gap: 12px; align-items: center; margin-top: 8px;">
+                <input type="checkbox" id="guild-subscribe" checked style="width: 18px; height: 18px; cursor: pointer;">
+                <label for="guild-subscribe" style="font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;">
+                  Subscribe to receive private preview notifications of future gallery exhibitions.
+                </label>
+              </div>
+
+              <div style="text-align: center; margin-top: 16px;">
+                <button type="submit" class="btn btn-primary" style="padding: 14px 48px;">Submit Registry Request</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ABOUT VIEW -->
+    <div id="about-view" class="view-container">
+      <!-- Section 1: About Hero -->
+      <section id="ab-hero" class="sec-hero section-layout text-center">
+        <div class="container" style="max-width: 800px; margin: 0 auto; padding: 40px 20px;">
+          <div class="about-hero-text">
+            <span class="subheading">Our Story</span>
+            <h1 class="font-playfair" style="font-size: 3.5rem; margin: 16px 0 24px; line-height: 1.15;">Honoring the Heritage of <br><span class="highlight-text">Warp & Weft</span></h1>
+            <p class="lead-text" style="font-size: 1.25rem; line-height: 1.8; max-width: 700px; margin: 0 auto;">Established in 2012, AuraWeave Studio began with a single wooden frame loom and a vision to bring tactile warmth back into contemporary residential architecture.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: The Studio Timeline -->
+      <section id="ab-timeline" class="section-layout bg-alt">
+        <div class="container">
+          <h2 class="section-title text-center font-playfair">Studio Milestones</h2>
+          <div class="timeline-container">
+            <div class="timeline-item">
+              <div class="timeline-badge">2012</div>
+              <div class="timeline-panel glass-card">
+                <h4>First Warp Thrown</h4>
+                <p>Founded by artist Clara Gable in a small barn studio. We sold locally and held basic frame loom classes.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-badge">2016</div>
+              <div class="timeline-panel glass-card">
+                <h4>Dye Garden Expansion</h4>
+                <p>Acquired adjacent greenhouses to cultivate native madder root, marigolds, and weld for local yarn botanical dyeing projects.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-badge">2021</div>
+              <div class="timeline-panel glass-card">
+                <h4>Architectural Focus</h4>
+                <p>Launched corporate commission arm, weaving acoustic-panel hangings for international lobbies and hotel complexes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Core Philosophy -->
+      <section id="ab-philosophy" class="section-layout">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="subheading">Foundations</span>
+            <h2 class="section-title font-playfair">Our Weaving Philosophy</h2>
+          </div>
+          <div class="card-grid">
+            <div class="philosophy-card glass-card">
+              <i class="fa-solid fa-hands-holding philosophy-icon"></i>
+              <h3>Preservation of Craft</h3>
+              <p>We utilize purely mechanical timber looms, resisting automation to ensure every row honors manual, artistic choice.</p>
+            </div>
+            <div class="philosophy-card glass-card">
+              <i class="fa-solid fa-seedling philosophy-icon"></i>
+              <h3>100% Ethical Sourcing</h3>
+              <p>We trace every fiber back to shepherds and farmers, ensuring safe working conditions and fair trade pay.</p>
+            </div>
+            <div class="philosophy-card glass-card">
+              <i class="fa-solid fa-compass philosophy-icon"></i>
+              <h3>Tactile Exploration</h3>
+              <p>We experiment constantly with unusual fibers—metallic threads, cedar bark, dried seagrass—to redefine boundaries.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Meet the Weavers -->
+      <section id="ab-team" class="section-layout bg-alt">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="subheading">The Artisans</span>
+            <h2 class="section-title font-playfair">Behind the Shuttle</h2>
+          </div>
+          <div class="card-grid">
+            <div class="team-card glass-card">
+              <div class="team-avatar">CG</div>
+              <h3>Clara Gable</h3>
+              <span>Founder & Principal Weaver</span>
+              <p>Expertise: Large scale botanical dye-work and geometric wall hangings. Clara has woven for over 20 years.</p>
+            </div>
+            <div class="team-card glass-card">
+              <div class="team-avatar">LN</div>
+              <h3>Liam Novak</h3>
+              <span>Lead Woodcraft & Loom Tech</span>
+              <p>Expertise: Custom loom manufacturing and structural timber frame construction. Liam manages installations.</p>
+            </div>
+            <div class="team-card glass-card">
+              <div class="team-avatar">ES</div>
+              <h3>Eva Sterling</h3>
+              <span>Yarn Dyer & Fiber Specialist</span>
+              <p>Expertise: Botanical dye extraction, mordant chemistry, and spinning wool roving. Eva leads workshops.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Press & Accolades -->
+      <section id="ab-press" class="section-layout">
+        <div class="container">
+          <h2 class="section-title text-center font-playfair">Press & Accolades</h2>
+          <div class="press-grid">
+            <div class="press-logo">Architectural Digest</div>
+            <div class="press-logo">Vogue Living</div>
+            <div class="press-logo">Elle Decor</div>
+            <div class="press-logo">Fiber Arts Journal</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Studio Space Virtual Tour -->
+      <section id="ab-space" class="section-layout bg-alt">
+        <div class="container">
+          <div class="space-tour-container glass-card">
+            <div class="space-text">
+              <span class="subheading">Studio Tour</span>
+              <h2 class="section-title font-playfair" style="text-align: left; margin-bottom: 16px;">Visit the Studio Virtually</h2>
+              <p style="color: var(--text-secondary); margin-bottom: 24px;">Take a look inside our workspace: the Dye Kitchen where color is extracted from roots, the main Weaving Room housing floor looms, and the sunny front Gallery where finished tapestries hang.</p>
+              <div class="space-tabs" style="display: flex; gap: 12px; margin-bottom: 20px;">
+                <button class="space-tab active" onclick="switchSpaceTab('dye', this)">The Dye Kitchen</button>
+                <button class="space-tab" onclick="switchSpaceTab('weaving', this)">Weaving Room</button>
+                <button class="space-tab" onclick="switchSpaceTab('gallery', this)">The Gallery</button>
+              </div>
+              <div class="space-desc-box" id="space-desc-content" style="background-color: var(--bg-secondary); padding: 20px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.95rem; line-height: 1.6;">
+                A warm, humid workshop smelling of lavender and marigolds. Dozens of organic linen and wool hanks bubble in natural dye pots, changing color in real time.
+              </div>
+            </div>
+            <div class="space-visual-frame" style="height: 320px; overflow: hidden; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--glass-shadow);">
+              <img src="t17.webp" alt="The Dye Kitchen Space" id="space-tour-img" style="width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease;">
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- SERVICES VIEW -->
+    <div id="services-view" class="view-container">
+      <!-- Section 1: Services Hero -->
+      <section id="srv-hero" class="sec-hero section-layout">
+        <div class="container text-center">
+          <span class="subheading">Our Services</span>
+          <h1 class="section-title font-playfair">Bespoke Textile Solutions</h1>
+          <p class="lead-text">From residential accent hangings to public acoustic tapestries, we provide comprehensive artisan textile services.</p>
+        </div>
+      </section>
+
+      <!-- Section 2: Bespoke Commissions -->
+      <section id="srv-commissions" class="section-layout bg-alt">
+        <div class="container">
+          <div class="service-split-grid">
+            <div class="service-text">
+              <span class="subheading">Bespoke Orders</span>
+              <h2 class="font-playfair" style="font-size: 2.2rem; margin-bottom: 16px;">Residential & Corporate Commissions</h2>
+              <p style="color: var(--text-secondary); margin-bottom: 20px;">We work directly with interior designers, curators, and collectors to manufacture custom woven art pieces customized to the exact scale, architecture, and mood of an interior.</p>
+              <ul class="srv-checklist" style="list-style: none; margin-bottom: 24px; padding: 0; display: flex; flex-direction: column; gap: 10px;">
+                <li><i class="fa-solid fa-check" style="color: var(--accent-color); margin-right: 8px;"></i> Acoustic consultation to reduce sound bouncing</li>
+                <li><i class="fa-solid fa-check" style="color: var(--accent-color); margin-right: 8px;"></i> Precise color-matching to fabric swatches</li>
+                <li><i class="fa-solid fa-check" style="color: var(--accent-color); margin-right: 8px;"></i> Solid hardwood framing, ready to mount</li>
+              </ul>
+              <button class="btn btn-primary" onclick="scrollToElement('h1-commissions')">Commission Estimator</button>
+            </div>
+            <div class="service-image-container" style="height: 320px; overflow: hidden; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--glass-shadow);">
+              <img src="t12.jpg" alt="Bespoke Commission Weaving" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Educational Workshops -->
+      <section id="srv-workshops" class="section-layout">
+        <div class="container">
+          <div class="service-split-grid" style="grid-template-columns: 0.85fr 1.15fr;">
+            <div class="service-image-container" style="height: 320px; overflow: hidden; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--glass-shadow);">
+              <img src="t4.jpg" alt="Educational Weaving Class" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="service-text">
+              <span class="subheading">Learn Weaving</span>
+              <h2 class="font-playfair" style="font-size: 2.2rem; margin-bottom: 16px;">Weaving Classes & Group Bookings</h2>
+              <p style="color: var(--text-secondary); margin-bottom: 24px;">Unlock the repetitive, meditative focus of hand-weaving. We host regular workshops, private creative parties, and corporate team-building sessions in our bright coastal studio.</p>
+              <button class="btn btn-outline" onclick="switchView('contact')">Book Group Workshop</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Textile Restoration & Conservation -->
+      <section id="srv-restoration" class="section-layout bg-alt">
+        <div class="container">
+          <div class="section-header text-center" style="margin-bottom: 32px;">
+            <span class="subheading">Conservation</span>
+            <h2 class="section-title font-playfair">Restoration & Conservation</h2>
+            <p class="section-desc" style="max-width: 600px; margin: 0 auto;">Have a damaged antique tapestry or family heirloom warp? We offer professional re-weaving, cleaning, and conservation mounting.</p>
+          </div>
+          
+          <div class="before-after-slider-container glass-card" id="ba-slider-parent">
+            <!-- Custom Before / After slider using pure CSS/JS -->
+            <div class="slider-wrapper">
+              <div class="before-img" id="ba-before">
+                <div class="slider-label before-label">Before Restoration</div>
+              </div>
+              <div class="after-img" id="ba-after">
+                <div class="slider-label after-label">After Restoration</div>
+              </div>
+              <input type="range" min="0" max="100" value="50" class="slider-input" id="ba-slider-input" oninput="handleBeforeAfterSlider(this.value)">
+              <div class="slider-divider" id="ba-divider"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Corporate Partnerships -->
+      <section id="srv-corporate" class="section-layout">
+        <div class="container">
+          <div class="service-split-grid">
+            <div class="service-text">
+              <span class="subheading">Corporate & Hospitality</span>
+              <h2 class="font-playfair" style="font-size: 2.2rem; margin-bottom: 16px;">Hospitality & Architect Licenses</h2>
+              <p style="color: var(--text-secondary); margin-bottom: 24px;">Provide warmth to hotel lobbies, guest rooms, and offices. We offer wholesale production of curated designs and flame-retardant fiber certifications for corporate safety compliance.</p>
+              <button class="btn btn-primary" onclick="switchView('contact')">Request Hospitality Catalog</button>
+            </div>
+            <div class="service-image-container" style="height: 320px; overflow: hidden; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--glass-shadow);">
+              <img src="t3.webp" alt="Corporate Tapestry Showcase" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Studio Space Rental -->
+      <section id="srv-rental" class="section-layout bg-alt">
+        <div class="container">
+          <div class="service-split-grid" style="grid-template-columns: 0.85fr 1.15fr;">
+            <div class="service-image-container" style="height: 320px; overflow: hidden; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--glass-shadow);">
+              <img src="t8.webp" alt="Floor Loom and Studio Spaces" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="service-text">
+              <span class="subheading">Studio Rentals</span>
+              <h2 class="font-playfair" style="font-size: 2.2rem; margin-bottom: 16px;">Studio & Floor Loom Rentals</h2>
+              <p style="color: var(--text-secondary); margin-bottom: 24px;">Are you an experienced weaver looking for massive looms? Rent space in our weaving room. Access our vertical steel tapestries, 40-shaft computer floor looms, and fully stocked dye kitchen.</p>
+              <button class="btn btn-outline" onclick="switchView('contact')">Apply for Studio Access</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- CONTACT VIEW -->
+    <div id="contact-view" class="view-container">
+      <!-- Section 1: Contact Hero -->
+      <section id="cnt-hero" class="sec-hero section-layout">
+        <div class="container text-center">
+          <span class="subheading">Get in Touch</span>
+          <h1 class="section-title font-playfair">Let's Weave Something Beautiful</h1>
+          <p class="lead-text">Reach out to book a custom commission, register for private weaving classes, or ask about our botanical dye methods.</p>
+        </div>
+      </section>
+
+      <!-- Section 2: Inquiry Form -->
+      <section id="cnt-form-section" class="section-layout bg-alt">
+        <div class="container">
+          <div class="contact-grid-modern">
+            <div class="contact-visual-panel" style="display: flex; flex-direction: column; gap: 28px;">
+              <div class="contact-image-frame" style="height: 240px; overflow: hidden; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--glass-shadow);">
+                <img src="t10.jpg" alt="AuraWeave Studio Reception Desk" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div class="contact-details-panel" style="display: flex; flex-direction: column; gap: 16px;">
+                <div class="detail-card glass-card" style="display: flex; align-items: center; gap: 20px; padding: 20px;">
+                  <i class="fa-solid fa-map-pin" style="font-size: 1.5rem; color: var(--accent-color);"></i>
+                  <div>
+                    <h4 style="margin-bottom: 4px; font-family: var(--font-display);">Studio Address</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">108 Artisans Way, Maritime District, Portland, OR</p>
+                  </div>
+                </div>
+                <div class="detail-card glass-card" style="display: flex; align-items: center; gap: 20px; padding: 20px;">
+                  <i class="fa-solid fa-envelope" style="font-size: 1.5rem; color: var(--accent-color);"></i>
+                  <div>
+                    <h4 style="margin-bottom: 4px; font-family: var(--font-display);">Email</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">hello@auraweavestudio.com</p>
+                  </div>
+                </div>
+                <div class="detail-card glass-card" style="display: flex; align-items: center; gap: 20px; padding: 20px;">
+                  <i class="fa-solid fa-phone" style="font-size: 1.5rem; color: var(--accent-color);"></i>
+                  <div>
+                    <h4 style="margin-bottom: 4px; font-family: var(--font-display);">Phone</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">+1 (503) 555-0192</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-wrapper glass-card" style="padding: 40px;">
+              <h2 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 24px;">Send an Inquiry</h2>
+              <form class="contact-form-el" onsubmit="handleFormSubmit(event, 'contact')">
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" required class="form-input">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" required class="form-input">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Inquiry Type</label>
+                  <select class="form-select">
+                    <option>Custom Wall Hanging Commission</option>
+                    <option>Weaving Workshop Booking</option>
+                    <option>Yarn Shop & Material Inquiry</option>
+                    <option>Press / Collaboration</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Message details</label>
+                  <textarea class="form-textarea" rows="5" required placeholder="Tell us about your space, dimensions, or questions..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" style="margin-top: 16px;">Send Message</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Visit the Studio Map -->
+      <section id="cnt-map" class="section-layout">
+        <div class="container">
+          <div class="contact-grid-modern" style="align-items: center;">
+            <div class="map-vector-frame glass-card" style="padding: 12px; border-radius: var(--radius-lg); overflow: hidden;">
+              <div id="map" style="height: 320px; width: 100%; border-radius: var(--radius-md); border: 1px solid var(--border-color); z-index: 1;"></div>
+            </div>
+            <div class="map-info-text">
+              <span class="subheading">Location</span>
+              <h2 class="font-playfair" style="font-size: 2.2rem; margin-bottom: 16px;">Visit the Studio</h2>
+              <p style="color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6;">Our physical studio is located in the heart of Portland's Maritime District. We welcome walk-in visitors to our front gallery on weekends, and offer private weekday curator tours by appointment.</p>
+              <div style="height: 150px; overflow: hidden; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                <img src="t14.jpg" alt="AuraWeave Studio Entrance" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: FAQs -->
+      <section id="cnt-faqs" class="section-layout bg-alt">
+        <div class="container">
+          <div class="contact-grid-modern" style="align-items: center;">
+            <div class="faqs-text-wrapper">
+              <span class="subheading">Common Questions</span>
+              <h2 class="font-playfair" style="font-size: 2.2rem; margin-bottom: 16px;">Frequently Asked Questions</h2>
+              <p style="color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6;">Need immediate answers? Read through our most common questions regarding lead times, custom materials, and tapestry care guidelines.</p>
+              <div style="height: 180px; overflow: hidden; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                <img src="t2.jpg" alt="AuraWeave Materials" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+            </div>
+            <div class="accordion" style="width: 100%; display: flex; flex-direction: column; gap: 16px;">
+              <div class="acc-item">
+                <button class="acc-header" onclick="toggleAccordion(this)">
+                  <span>What is the lead time for a custom commission?</span>
+                  <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="acc-body">
+                  <p>Typically, custom residential and corporate wall hangings take between 4 to 8 weeks depending on the dimensions, fiber choice, and current loom schedules.</p>
+                </div>
+              </div>
+              <div class="acc-item">
+                <button class="acc-header" onclick="toggleAccordion(this)">
+                  <span>Are the weaving kits included in the class registration fee?</span>
+                  <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="acc-body">
+                  <p>Yes! Our introductory frame loom classes include a copper frame loom, shuttle, warp threads, and a starter pack of botanically dyed merino wool to take home.</p>
+                </div>
+              </div>
+              <div class="acc-item">
+                <button class="acc-header" onclick="toggleAccordion(this)">
+                  <span>How do I clean and care for a woven wool wall hanging?</span>
+                  <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="acc-body">
+                  <p>Textile wall hangings require minimal care. Lightly shake or dust with a feather duster once every few months. Do not wash or dry clean. Hang away from direct midday sunlight to preserve the organic dyes.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Wholesale & Retail partners -->
+      <section id="cnt-wholesale" class="section-layout">
+        <div class="container">
+          <div class="contact-grid-modern" style="align-items: center;">
+            <div class="wholesale-text-box">
+              <span class="subheading">Wholesale</span>
+              <h2 class="font-playfair" style="font-size: 2.2rem; margin-bottom: 16px;">Wholesale & Boutique Catalog</h2>
+              <p style="color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6;">Are you a retail boutique owner or interior gallery curator? Reach out to download our complete wholesale linesheet and catalog.</p>
+              <button class="btn btn-outline" onclick="triggerCatalogDownload()">Download Linesheet (PDF)</button>
+            </div>
+            <div class="wholesale-image" style="height: 220px; overflow: hidden; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--glass-shadow);">
+              <img src="t5.webp" alt="Wholesale Tapestry Catalog Showcase" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Direct Studio Lines -->
+      <section id="cnt-lines" class="section-layout bg-alt">
+        <div class="container">
+          <h2 class="section-title text-center font-playfair" style="margin-bottom: 32px;">Direct Contact Lines</h2>
+          <div class="card-grid">
+            <div class="quick-contact-card glass-card text-center" style="padding: 24px; display: flex; flex-direction: column; gap: 16px; align-items: center; justify-content: center;">
+              <i class="fa-solid fa-envelope-open-text" style="font-size: 2rem; color: var(--accent-color);"></i>
+              <h4>Email Support</h4>
+              <button class="btn btn-sm btn-outline" onclick="copyText('hello@auraweavestudio.com', this)">Copy Email</button>
+            </div>
+            <div class="quick-contact-card glass-card text-center" style="padding: 24px; display: flex; flex-direction: column; gap: 16px; align-items: center; justify-content: center;">
+              <i class="fa-solid fa-graduation-cap" style="font-size: 2rem; color: var(--accent-color);"></i>
+              <h4>Class Registrations</h4>
+              <button class="btn btn-sm btn-outline" onclick="copyText('classes@auraweavestudio.com', this)">Copy Email</button>
+            </div>
+            <div class="quick-contact-card glass-card text-center" style="padding: 24px; display: flex; flex-direction: column; gap: 16px; align-items: center; justify-content: center;">
+              <i class="fa-solid fa-phone-volume" style="font-size: 2rem; color: var(--accent-color);"></i>
+              <h4>Call Studio</h4>
+              <button class="btn btn-sm btn-outline" onclick="copyText('+15035550192', this)">Copy Phone</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- USER DASHBOARD VIEW -->
+    <div id="user-dash-view" class="view-container">
+      <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+          <div class="sidebar-logo">
+            <a href="#" class="logo-container" onclick="switchView('home1')" style="display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
+              <div class="logo-symbol">
+                <svg viewBox="0 0 100 100" class="logo-svg" width="30" height="30">
+                  <path d="M20 30 Q 35 15, 50 30 T 80 30 M20 50 Q 35 35, 50 50 T 80 50 M20 70 Q 35 55, 50 70 T 80 70" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="logo-text">
+                <span class="logo-title">AURAWEAVE</span>
+                <span class="logo-subtitle" style="display: block;">FIBER ART STUDIO</span>
+              </div>
+            </a>
+          </div>
+          <ul class="sidebar-menu">
+            <li class="sidebar-menu-item active"><a href="#ud-welcome"><i class="fa-solid fa-user"></i> Overview</a></li>
+            <li class="sidebar-menu-item"><a href="#ud-orders"><i class="fa-solid fa-spinner"></i> Commission Tracker</a></li>
+            <li class="sidebar-menu-item"><a href="#ud-classes"><i class="fa-solid fa-graduation-cap"></i> My Classes</a></li>
+            <li class="sidebar-menu-item"><a href="#ud-wishlist"><i class="fa-solid fa-heart"></i> Saved Pieces</a></li>
+            <li class="sidebar-menu-item"><a href="#ud-rewards"><i class="fa-solid fa-award"></i> Loom Points</a></li>
+          </ul>
+          <div style="margin-top: auto; padding-top: 24px; border-top: 1px solid var(--border-color);">
+            <button class="btn btn-sm btn-outline btn-block" onclick="switchView('home1')"><i class="fa-solid fa-arrow-right-from-bracket"></i> Exit Portal</button>
+          </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="dashboard-content">
+          <header class="dashboard-content-header">
+            <div>
+              <span class="subheading" style="margin-bottom: 4px;">User Portal</span>
+              <h2 class="font-playfair" style="margin: 0; font-size: 1.8rem;">Weaver Dashboard</h2>
+            </div>
+            <div class="dashboard-header-controls">
+              <!-- LTR/RTL Toggle -->
+              <div class="direction-toggle-btn" onclick="toggleDirection()" title="Switch Layout Direction">
+                <span class="direction-text">LTR</span>
+                <span class="direction-circle-indicator"></span>
+              </div>
+              <!-- Theme Toggle -->
+              <button class="control-btn theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Dark/Light Theme" style="width: 38px; height: 38px; border-radius: var(--radius-round); background-color: var(--bg-secondary); border: 1px solid var(--border-color); cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-primary);">
+                <i class="fa-solid fa-moon moon-icon"></i>
+                <i class="fa-solid fa-sun sun-icon" style="display: none;"></i>
+              </button>
+            </div>
+          </header>
+
+          <!-- Section 1: Welcome Panel -->
+          <section id="ud-welcome" style="padding: 0; display: flex; flex-direction: column; gap: 24px;">
+            <div class="welcome-banner glass-card" style="margin: 0;">
+              <div class="welcome-meta">
+                <span class="user-tier"><i class="fa-solid fa-medal"></i> Silver Guild Weaver</span>
+                <h1 class="font-playfair">Welcome Back, <span class="username-txt">Sarah Connor</span></h1>
+                <p style="margin: 8px 0 0; color: var(--text-secondary);">Review the progress of your bespoke commission, check your registered classes, and redeem loom points.</p>
+              </div>
+              <div class="welcome-quick-stats">
+                <div class="quick-stat-box">
+                  <strong>450</strong>
+                  <span>Loom Points</span>
+                </div>
+                <div class="quick-stat-box">
+                  <strong>1 Class</strong>
+                  <span>Next: June 20th</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- User Overview Charts -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+              <!-- Chart 1: Loom Points Activity Tracker -->
+              <div class="glass-card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px; margin: 0;">
+                <h4 class="font-playfair" style="margin: 0; font-size: 1.1rem; color: var(--text-primary);">Loom Points Activity</h4>
+                <span style="font-size: 0.85rem; color: var(--text-secondary);">Points earned & redeemed over the past 6 months</span>
+                <div class="chart-box" style="height: 120px;">
+                  <svg viewBox="0 0 300 120" width="100%" height="100%">
+                    <!-- Area Under Curve -->
+                    <path d="M 0 100 Q 50 80, 100 90 T 200 40 T 300 20 L 300 120 L 0 120 Z" fill="rgba(201, 107, 76, 0.12)"></path>
+                    <!-- Line -->
+                    <path d="M 0 100 Q 50 80, 100 90 T 200 40 T 300 20" fill="none" stroke="var(--accent-color)" stroke-width="3" stroke-linecap="round"></path>
+                    <!-- Points -->
+                    <circle cx="100" cy="90" r="4" fill="var(--accent-color)"></circle>
+                    <circle cx="200" cy="40" r="4" fill="var(--accent-color)"></circle>
+                    <circle cx="300" cy="20" r="4" fill="var(--accent-color)"></circle>
+                    <!-- Grid Lines -->
+                    <line x1="0" y1="120" x2="300" y2="120" stroke="var(--border-color)" stroke-width="1"></line>
+                    <line x1="0" y1="60" x2="300" y2="60" stroke="var(--border-color)" stroke-width="1" stroke-dasharray="2 4"></line>
+                    <!-- Labels -->
+                    <text x="5" y="15" font-size="8" fill="var(--text-secondary)" font-family="Outfit">500 pts</text>
+                    <text x="5" y="65" font-size="8" fill="var(--text-secondary)" font-family="Outfit">250 pts</text>
+                    <text x="10" y="115" font-size="8" fill="var(--text-secondary)" font-family="Outfit">Jan</text>
+                    <text x="100" y="115" font-size="8" fill="var(--text-secondary)" font-family="Outfit">Mar</text>
+                    <text x="200" y="115" font-size="8" fill="var(--text-secondary)" font-family="Outfit">May</text>
+                    <text x="280" y="115" font-size="8" fill="var(--text-secondary)" font-family="Outfit">Jun</text>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Chart 2: Weaving Progress Monitor -->
+              <div class="glass-card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px; margin: 0;">
+                <h4 class="font-playfair" style="margin: 0; font-size: 1.1rem; color: var(--text-primary);">Active Weave Progression</h4>
+                <span style="font-size: 0.85rem; color: var(--text-secondary);">Weft row completion & shuttle speed velocity statistics</span>
+                <div class="chart-box" style="height: 120px; display: flex; gap: 16px; align-items: center; justify-content: space-around;">
+                  <!-- Progress Ring -->
+                  <div style="position: relative; width: 80px; height: 80px; flex-shrink: 0;">
+                    <svg viewBox="0 0 36 36" style="width: 100%; height: 100%; transform: rotate(-90deg);">
+                      <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="var(--border-color)" stroke-width="3"></path>
+                      <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="var(--accent-gold)" stroke-width="3" stroke-dasharray="68, 100"></path>
+                    </svg>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                      <span style="font-weight: 700; font-size: 1.1rem; display: block; color: var(--text-primary); line-height: 1;">68%</span>
+                      <span style="font-size: 0.5rem; color: var(--text-secondary); text-transform: uppercase;">Row Target</span>
+                    </div>
+                  </div>
+                  <!-- Bar Tracker -->
+                  <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 12px;">
+                    <div>
+                      <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 4px;">
+                        <span>Warp Tension</span>
+                        <strong>Optimal (92%)</strong>
+                      </div>
+                      <div style="height: 4px; background-color: var(--border-color); border-radius: 2px; overflow: hidden;">
+                        <div style="width: 92%; height: 100%; background-color: var(--accent-color);"></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 4px;">
+                        <span>Dye Batch Uniformity</span>
+                        <strong>High (88%)</strong>
+                      </div>
+                      <div style="height: 4px; background-color: var(--border-color); border-radius: 2px; overflow: hidden;">
+                        <div style="width: 88%; height: 100%; background-color: var(--accent-gold);"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 2: Active Orders & Commissions -->
+          <section id="ud-orders" style="padding: 0;">
+            <h3 class="font-playfair" style="font-size: 1.5rem; margin-bottom: 20px;">Your Custom Commission Tracker</h3>
+            <div class="order-progress-card glass-card" style="margin: 0;">
+              <div class="order-info-header">
+                <span>Commission ID: <strong>#AW-9081</strong></span>
+                <span>Est. Delivery: <strong>July 12th, 2026</strong></span>
+              </div>
+              <div class="progress-steps-row">
+                <div class="prog-step complete">
+                  <div class="step-dot"><i class="fa-solid fa-check"></i></div>
+                  <span>Design Approved</span>
+                </div>
+                <div class="prog-step active">
+                  <div class="step-dot">2</div>
+                  <span>Yarn Dyeing</span>
+                </div>
+                <div class="prog-step">
+                  <div class="step-dot">3</div>
+                  <span>On the Loom</span>
+                </div>
+                <div class="prog-step">
+                  <div class="step-dot">4</div>
+                  <span>Shaped & Mounted</span>
+                </div>
+              </div>
+              <div class="progress-details-alert">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Your wool fibers have been mordanted and are currently being dyed in native sage bath solutions. Weaving starts next Monday.</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 3: My Class Schedule -->
+          <section id="ud-classes" style="padding: 0;">
+            <h3 class="font-playfair" style="font-size: 1.5rem; margin-bottom: 20px;">My Registered Classes</h3>
+            <div class="dash-class-list">
+              <div class="dash-class-card glass-card">
+                <div class="class-summary">
+                  <h4>Intro to Tapestry Weaving</h4>
+                  <span style="color: var(--text-secondary); font-size: 0.9rem;">Instructor: Clara Gable | Studio Room A</span>
+                </div>
+                <div class="class-time-badge">
+                  <i class="fa-solid fa-calendar"></i> Sat, June 20th | 10:00 AM
+                </div>
+                <button class="btn btn-sm btn-outline" onclick="alert('Ticket downloaded as PDF')"><i class="fa-solid fa-download"></i> Download Ticket</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 4: My Wishlist & Saved Pieces -->
+          <section id="ud-wishlist" style="padding: 0;">
+            <h3 class="font-playfair" style="font-size: 1.5rem; margin-bottom: 20px;">Saved Gallery Pieces</h3>
+            <div class="card-grid">
+              <div class="wishlist-item-card glass-card" style="margin: 0;">
+                <div class="wishlist-img" style="background-image: url('t12.jpg'); background-size: cover; background-position: center; height: 180px; border-radius: var(--radius-sm); margin-bottom: 16px;"></div>
+                <div class="wishlist-meta">
+                  <h4>Nordic Mist Hanging</h4>
+                  <span style="display: block; margin-bottom: 12px; font-weight: 600; color: var(--accent-color);">$850.00 USD</span>
+                  <button class="btn btn-sm btn-primary btn-block" onclick="alert('Added to Checkout')">Move to Cart</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 5: Loyalty Rewards & Loom Points -->
+          <section id="ud-rewards" style="padding: 0;">
+            <h3 class="font-playfair" style="font-size: 1.5rem; margin-bottom: 20px;">Redeem Your Loom Points</h3>
+            <div class="rewards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px;">
+              <div class="reward-coupon glass-card text-center" style="margin: 0; padding: 24px;">
+                <h4 style="margin-bottom: 8px;">10% Off Yarn Skeins</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 16px;">Redeem for 100 points</p>
+                <button class="btn btn-sm btn-outline" onclick="redeemReward(100, '10% Off Yarn')">Redeem Code</button>
+              </div>
+              <div class="reward-coupon glass-card text-center" style="margin: 0; padding: 24px;">
+                <h4 style="margin-bottom: 8px;">Free Class Loom Kit</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 16px;">Redeem for 300 points</p>
+                <button class="btn btn-sm btn-outline" onclick="redeemReward(300, 'Free Loom Kit')">Redeem Code</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 6: Account Settings -->
+          <section id="ud-settings" style="padding: 0;">
+            <div class="settings-panel glass-card" style="margin: 0; padding: 32px;">
+              <h3 class="font-playfair" style="font-size: 1.5rem; margin-bottom: 20px;">Account Details</h3>
+              <form onsubmit="handleFormSubmit(event, 'settings')">
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label class="form-label">Shipping Address</label>
+                    <input type="text" value="456 Oak Avenue, Apt 2B, Portland, OR" class="form-input">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Contact Number</label>
+                    <input type="text" value="+1 (503) 555-9011" class="form-input">
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 16px;">Save Changes</button>
+              </form>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD VIEW -->
+    <div id="admin-dash-view" class="view-container">
+      <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+          <div class="sidebar-logo">
+            <a href="#" class="logo-container" onclick="switchView('home1')" style="display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
+              <div class="logo-symbol">
+                <svg viewBox="0 0 100 100" class="logo-svg" width="30" height="30">
+                  <path d="M20 30 Q 35 15, 50 30 T 80 30 M20 50 Q 35 35, 50 50 T 80 50 M20 70 Q 35 55, 50 70 T 80 70" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="logo-text">
+                <span class="logo-title">AURAWEAVE</span>
+                <span class="logo-subtitle" style="display: block;">FIBER ART STUDIO</span>
+              </div>
+            </a>
+          </div>
+          <ul class="sidebar-menu">
+            <li class="sidebar-menu-item active"><a href="#ad-metrics"><i class="fa-solid fa-chart-line"></i> Operations Center</a></li>
+            <li class="sidebar-menu-item"><a href="#ad-commissions"><i class="fa-solid fa-clipboard-list"></i> Commission Kanban</a></li>
+            <li class="sidebar-menu-item"><a href="#ad-workshops"><i class="fa-solid fa-calendar-days"></i> Workshop Schedule</a></li>
+            <li class="sidebar-menu-item"><a href="#ad-inventory"><i class="fa-solid fa-boxes-stacked"></i> Yarn Inventory</a></li>
+            <li class="sidebar-menu-item"><a href="#ad-reports"><i class="fa-solid fa-chart-bar"></i> Revenue Reports</a></li>
+          </ul>
+          <div style="margin-top: auto; padding-top: 24px; border-top: 1px solid var(--border-color);">
+            <button class="btn btn-sm btn-outline btn-block" onclick="switchView('home1')"><i class="fa-solid fa-arrow-right-from-bracket"></i> Exit Portal</button>
+          </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="dashboard-content">
+          <header class="dashboard-content-header">
+            <div>
+              <span class="subheading" style="margin-bottom: 4px;">Admin Portal</span>
+              <h2 class="font-playfair" style="margin: 0; font-size: 1.8rem;">Studio Operations Center</h2>
+            </div>
+            <div class="dashboard-header-controls">
+              <!-- LTR/RTL Toggle -->
+              <div class="direction-toggle-btn" onclick="toggleDirection()" title="Switch Layout Direction">
+                <span class="direction-text">LTR</span>
+                <span class="direction-circle-indicator"></span>
+              </div>
+              <!-- Theme Toggle -->
+              <button class="control-btn theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Dark/Light Theme" style="width: 38px; height: 38px; border-radius: var(--radius-round); background-color: var(--bg-secondary); border: 1px solid var(--border-color); cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-primary);">
+                <i class="fa-solid fa-moon moon-icon"></i>
+                <i class="fa-solid fa-sun sun-icon" style="display: none;"></i>
+              </button>
+            </div>
+          </header>
+
+          <!-- Section 1: Studio Metrics Summary -->
+          <section id="ad-metrics" style="padding: 0;">
+            <div class="metrics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;">
+              <div class="metric-card glass-card" style="margin: 0;">
+                <span>Monthly Revenue</span>
+                <strong>$18,450.00</strong>
+                <div class="sparkline-container" style="margin-top: 12px;">
+                  <svg viewBox="0 0 100 30" width="100%" height="30">
+                    <path d="M 0 20 L 20 15 L 40 25 L 60 10 L 80 5 L 100 12" fill="none" stroke="var(--accent-color)" stroke-width="2"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="metric-card glass-card" style="margin: 0;">
+                <span>Active Loom Bookings</span>
+                <strong>14 / 20</strong>
+                <div class="sparkline-container" style="margin-top: 12px;">
+                  <svg viewBox="0 0 100 30" width="100%" height="30">
+                    <path d="M 0 10 L 20 18 L 40 12 L 60 22 L 80 15 L 100 18" fill="none" stroke="var(--accent-gold)" stroke-width="2"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="metric-card glass-card" style="margin: 0;">
+                <span>Commission Backlog</span>
+                <strong>9 Orders</strong>
+                <div class="sparkline-container" style="margin-top: 12px;">
+                  <svg viewBox="0 0 100 30" width="100%" height="30">
+                    <path d="M 0 25 L 20 20 L 40 18 L 60 15 L 80 8 L 100 5" fill="none" stroke="var(--accent-color)" stroke-width="2"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 2: Commission Work Orders -->
+          <section id="ad-commissions" style="padding: 0;">
+            <div class="admin-table-panel glass-card" style="margin: 0;">
+              <h3 class="font-playfair" style="font-size: 1.5rem; margin-bottom: 20px;">Active Commissions Kanban</h3>
+              <div class="responsive-table-container">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Customer</th>
+                      <th>Scale Dimension</th>
+                      <th>Weave Stage</th>
+                      <th>Dowel Wood</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="commission-list-body">
+                    <tr>
+                      <td>Sarah Connor</td>
+                      <td>36" x 48" (Small)</td>
+                      <td><span class="badge stage-dyeing">Yarn Dyeing</span></td>
+                      <td>Hard Maple</td>
+                      <td><button class="btn btn-xs btn-outline" onclick="advanceStage(this)">Next Stage</button></td>
+                    </tr>
+                    <tr>
+                      <td>Donald Cooper</td>
+                      <td>60" x 80" (Large)</td>
+                      <td><span class="badge stage-weaving">On the Loom</span></td>
+                      <td>White Oak</td>
+                      <td><button class="btn btn-xs btn-outline" onclick="advanceStage(this)">Next Stage</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 3: Workshop Roster & Schedule Manager -->
+          <section id="ad-workshops" style="padding: 0;">
+            <div class="admin-table-panel glass-card" style="margin: 0;">
+              <div class="panel-header-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 class="font-playfair" style="font-size: 1.5rem; margin: 0;">Class Schedules</h3>
+                <button class="btn btn-sm btn-primary" onclick="addNewClassAdmin()">Add New Class</button>
+              </div>
+              <div class="responsive-table-container">
+                <table class="admin-table" id="admin-class-table">
+                  <thead>
+                    <tr>
+                      <th>Class Title</th>
+                      <th>Date & Time</th>
+                      <th>Instructor</th>
+                      <th>Enrolled</th>
+                      <th>Control</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Intro to Tapestry Weaving</td>
+                      <td>June 20, 2026 | 10AM</td>
+                      <td>Clara Gable</td>
+                      <td>5 / 8 Students</td>
+                      <td><button class="btn btn-xs btn-danger" onclick="cancelClassAdmin(this)">Cancel</button></td>
+                    </tr>
+                    <tr>
+                      <td>Sculptural Textures & Shag</td>
+                      <td>June 21, 2026 | 11AM</td>
+                      <td>Liam Novak</td>
+                      <td>1 / 6 Students</td>
+                      <td><button class="btn btn-xs btn-danger" onclick="cancelClassAdmin(this)">Cancel</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 4: Yarn Shop Inventory Tracker -->
+          <section id="ad-inventory" style="padding: 0;">
+            <div class="admin-table-panel glass-card" style="margin: 0;">
+              <h3 class="font-playfair" style="font-size: 1.5rem; margin-bottom: 20px;">Yarn Skein Stock Levels</h3>
+              <div class="responsive-table-container">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Skein Shade</th>
+                      <th>Fiber Type</th>
+                      <th>Weight In Stock</th>
+                      <th>Status Alert</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Desert Sunset (Terracotta)</td>
+                      <td>Organic Merino Wool</td>
+                      <td>45 kg</td>
+                      <td><span class="badge stock-ok">Optimal</span></td>
+                    </tr>
+                    <tr>
+                      <td>Nordic Frost (Grey)</td>
+                      <td>Unspun Flax Linen</td>
+                      <td>3 kg</td>
+                      <td><span class="badge stock-low">Low Stock Alert</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 5: Sales & Revenue Reports -->
+          <section id="ad-reports" style="padding: 0;">
+            <div class="admin-report-grid glass-card" style="margin: 0; padding: 32px;">
+              <h3 class="font-playfair" style="font-size: 1.5rem; margin-bottom: 20px;">Revenue Channels</h3>
+              <div class="chart-box">
+                <svg viewBox="0 0 400 200" width="100%" height="200" id="revenue-chart">
+                  <line x1="40" y1="20" x2="40" y2="180" stroke="var(--text-secondary)" stroke-width="2"/>
+                  <line x1="40" y1="180" x2="380" y2="180" stroke="var(--text-secondary)" stroke-width="2"/>
+                  <!-- Grid Lines -->
+                  <line x1="40" y1="60" x2="380" y2="60" stroke="var(--border-color)" stroke-width="1" stroke-dasharray="2 4"/>
+                  <line x1="40" y1="120" x2="380" y2="120" stroke="var(--border-color)" stroke-width="1" stroke-dasharray="2 4"/>
+                  <!-- Bars -->
+                  <rect x="70" y="50" width="40" height="130" fill="var(--accent-color)" rx="4"/>
+                  <rect x="170" y="90" width="40" height="90" fill="var(--accent-gold)" rx="4"/>
+                  <rect x="270" y="130" width="40" height="50" fill="var(--text-secondary)" rx="4"/>
+                  <!-- Labels -->
+                  <text x="90" y="195" text-anchor="middle" font-size="10" fill="var(--text-primary)" font-family="Outfit">Art Sales</text>
+                  <text x="190" y="195" text-anchor="middle" font-size="10" fill="var(--text-primary)" font-family="Outfit">Workshops</text>
+                  <text x="290" y="195" text-anchor="middle" font-size="10" fill="var(--text-primary)" font-family="Outfit">Yarn Shop</text>
+                </svg>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 6: System Configurations -->
+          <section id="ad-settings" style="padding: 0;">
+            <div class="settings-panel glass-card" style="margin: 0; padding: 32px;">
+              <h3 class="font-playfair" style="font-size: 1.5rem; margin-bottom: 20px;">Studio Banner Configuration</h3>
+              <form onsubmit="handleFormSubmit(event, 'admin-config')">
+                <div class="form-group">
+                  <label class="form-label">Active Studio Notice Banner Text</label>
+                  <input type="text" value="New Class Schedule released: Register for Natural Dyeing workshops now!" class="form-input">
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 16px;">Publish Notice</button>
+              </form>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="main-footer" id="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-info">
+        <a href="#" class="logo-container" onclick="switchView('home1')" style="margin-bottom: 20px; display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
+          <div class="logo-symbol">
+            <svg viewBox="0 0 100 100" class="logo-svg" width="40" height="40">
+              <path d="M20 30 Q 35 15, 50 30 T 80 30 M20 50 Q 35 35, 50 50 T 80 50 M20 70 Q 35 55, 50 70 T 80 70" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+              <line x1="30" y1="15" x2="30" y2="85" stroke="currentColor" stroke-width="2" stroke-dasharray="2 4"/>
+              <line x1="50" y1="15" x2="50" y2="85" stroke="currentColor" stroke-width="2" stroke-dasharray="2 4"/>
+              <line x1="70" y1="15" x2="70" y2="85" stroke="currentColor" stroke-width="2" stroke-dasharray="2 4"/>
+            </svg>
+          </div>
+          <div class="logo-text" style="text-align: left;">
+            <span class="logo-title">AURAWEAVE</span>
+            <span class="logo-subtitle" style="display: block;">FIBER ART STUDIO</span>
+          </div>
+        </a>
+        <p>Preserving the tactile heritage of hand-weaving through modern, architecturally styled wall hangings and educational studio guilds.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#" onclick="switchView('home1')">Home 1</a></li>
+          <li><a href="#" onclick="switchView('home2')">Home 2</a></li>
+          <li><a href="#" onclick="switchView('about')">About Studio</a></li>
+          <li><a href="#" onclick="switchView('services')">Our Services</a></li>
+          <li><a href="#" onclick="switchView('contact')">Get in Touch</a></li>
+        </ul>
+      </div>
+      <div class="footer-legal">
+        <p>&copy; 2026 AuraWeave Studio. Handwoven with care in Portland, OR. All rights reserved.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+          <a href="#"><i class="fa-brands fa-vimeo"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- Interactive Gallery Detail Modal -->
+  <div class="art-modal-overlay" id="art-modal" onclick="closeArtModal()">
+    <div class="art-modal-card glass-card" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeArtModal()"><i class="fa-solid fa-times"></i></button>
+      <div class="art-modal-split">
+        <div class="art-modal-visual" id="art-modal-bg">
+          <!-- Textures -->
+        </div>
+        <div class="art-modal-info">
+          <h3 id="art-modal-title" class="font-playfair"></h3>
+          <p id="art-modal-desc"></p>
+          <div class="customizer-options">
+            <label class="form-label">Customize Mounting Wood</label>
+            <select class="form-select" id="detail-dowel-wood">
+              <option>Natural Walnut</option>
+              <option>Hard Maple</option>
+              <option>Bleached Birch</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-block" onclick="alert('Customized item added to inquiry!')">Request Quote with Customization</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript file -->
+  <script src="script.js"></script>
+</body>
+</html>
