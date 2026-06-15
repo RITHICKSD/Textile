@@ -39,16 +39,11 @@ function switchView(viewId) {
     activeView.classList.add("active");
   }
 
-  // Hide global header/footer for immersive dashboards, login, and register views
+  // Header and footer should be visible on all active views
   const header = document.getElementById("site-header");
   const footer = document.getElementById("site-footer");
-  if (viewId === 'user-dash' || viewId === 'admin-dash' || viewId === 'login' || viewId === 'register') {
-    if (header) header.style.display = "none";
-    if (footer) footer.style.display = "none";
-  } else {
-    if (header) header.style.display = "";
-    if (footer) footer.style.display = "";
-  }
+  if (header) header.style.display = "";
+  if (footer) footer.style.display = "";
 
   // Update navigation active states
   updateNavActiveState(viewId);
@@ -77,17 +72,11 @@ function updateNavActiveState(viewId) {
 
   // Highlight parent dropdown links if children are active
   const homeDropdown = document.getElementById("home-menu-link");
-  const dashDropdown = document.getElementById("dashboard-menu-link");
 
   if (viewId === "home1" || viewId === "home2") {
-    homeDropdown.classList.add("active");
-    dashDropdown.classList.remove("active");
-  } else if (viewId === "user-dash" || viewId === "admin-dash") {
-    dashDropdown.classList.add("active");
-    homeDropdown.classList.remove("active");
+    if (homeDropdown) homeDropdown.classList.add("active");
   } else {
-    homeDropdown.classList.remove("active");
-    dashDropdown.classList.remove("active");
+    if (homeDropdown) homeDropdown.classList.remove("active");
   }
 }
 
@@ -552,9 +541,6 @@ function switchSpaceTab(tabId, btn) {
 }
 
 // Global modal overlays
-function openLoginModal() {
-  window.location.href = "login.html";
-}
 
 function openInteractiveDetail(title, desc) {
   const artModal = document.getElementById("art-modal");
@@ -581,26 +567,6 @@ function handleFormSubmit(event, formType) {
     showNoticeToast("Thank you for joining the AuraWeave Guild newsletter!");
   } else if (formType === "contact") {
     showNoticeToast("Message received successfully! We will contact you within 24 hours.");
-  } else if (formType === "settings") {
-    showNoticeToast("Account credentials updated successfully.");
-  } else if (formType === "admin-config") {
-    showNoticeToast("System configuration updated. Announcement banner refreshed.");
-  }
-}
-
-function handleLoginSubmit(event) {
-  event.preventDefault();
-  const email = document.getElementById("login-email").value;
-
-  closeLoginModal(null);
-
-  // If email contains "admin", switch to Admin Dashboard, else User Dashboard
-  if (email.toLowerCase().includes("admin")) {
-    switchView("admin-dash");
-    showNoticeToast("Admin Login Successful. Switched to Operations Center.");
-  } else {
-    switchView("user-dash");
-    showNoticeToast("Welcome, Guild Member. Switched to User Center.");
   }
 }
 
@@ -667,47 +633,7 @@ function triggerCatalogDownload() {
   showNoticeToast("Catalog PDF download initiated.");
 }
 
-function redeemReward(points, rewardName) {
-  showNoticeToast(`Redeemed ${points} points for: ${rewardName}! Check email for promo code.`);
-}
 
-function advanceStage(btn) {
-  const row = btn.closest("tr");
-  const badge = row.querySelector(".badge");
-  
-  if (badge.classList.contains("stage-dyeing")) {
-    badge.className = "badge stage-weaving";
-    badge.textContent = "On the Loom";
-    showNoticeToast("Commission order advanced to Weaving stage.");
-  } else if (badge.classList.contains("stage-weaving")) {
-    badge.className = "badge stage-dyeing";
-    badge.textContent = "Finished & Dried";
-    badge.style.backgroundColor = "rgba(143, 168, 155, 0.15)";
-    badge.style.color = "#5b7367";
-    showNoticeToast("Commission advanced to Finishing stage.");
-    btn.remove(); // Finished, no more stages
-  }
-}
-
-function addNewClassAdmin() {
-  const table = document.getElementById("admin-class-table").getElementsByTagName("tbody")[0];
-  const newRow = table.insertRow();
-  newRow.innerHTML = `
-    <td>Advanced Frame Weaves</td>
-    <td>July 5, 2026 | 2PM</td>
-    <td>Eva Sterling</td>
-    <td>0 / 5 Students</td>
-    <td><button class="btn btn-xs btn-danger" onclick="cancelClassAdmin(this)">Cancel</button></td>
-  `;
-  showNoticeToast("New class session added to schedule roster.");
-}
-
-function cancelClassAdmin(btn) {
-  if (confirm("Are you sure you want to cancel this class?")) {
-    btn.closest("tr").remove();
-    showNoticeToast("Class session cancelled successfully.");
-  }
-}
 
 // Convert CSS RGB color string to Hex
 function rgbToHex(rgb) {

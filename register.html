@@ -1,99 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AuraWeave Studio - Register</title>
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M20 30 Q 35 15, 50 30 T 80 30 M20 50 Q 35 35, 50 50 T 80 50 M20 70 Q 35 55, 50 70 T 80 70' fill='none' stroke='%23c96b4c' stroke-width='6' stroke-linecap='round'/%3E%3Cline x1='30' y1='15' x2='30' y2='85' stroke='%23c96b4c' stroke-width='2' stroke-dasharray='2 4'/%3E%3Cline x1='50' y1='15' x2='50' y2='85' stroke='%23c96b4c' stroke-width='2' stroke-dasharray='2 4'/%3E%3Cline x1='70' y1='15' x2='70' y2='85' stroke='%23c96b4c' stroke-width='2' stroke-dasharray='2 4'/%3E%3C/svg%3E">
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="style.css">
+  <meta http-equiv="refresh" content="0; url=index.html">
+  <title>Redirecting...</title>
+  <script>
+    window.location.href = "index.html";
+  </script>
 </head>
-<body class="light-theme">
-
-  <div id="register-view">
-    <!-- Right Side Controls Header -->
-    <div class="auth-controls-header">
-      <!-- LTR/RTL Toggle -->
-      <div class="direction-toggle-btn" onclick="toggleDirection()" title="Switch Layout Direction">
-        <span class="direction-text">LTR</span>
-        <span class="direction-circle-indicator"></span>
-      </div>
-      <!-- Theme Toggle -->
-      <button class="control-btn theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Dark/Light Theme" style="width: 38px; height: 38px; border-radius: var(--radius-round); background-color: var(--bg-secondary); border: 1px solid var(--border-color); cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-primary);">
-        <i class="fa-solid fa-moon moon-icon"></i>
-        <i class="fa-solid fa-sun sun-icon" style="display: none;"></i>
-      </button>
-    </div>
-
-    <div class="auth-card glass-card">
-      <!-- Top Logo -->
-      <div class="auth-logo-section">
-        <a href="index.html" class="logo-container" style="display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
-          <div class="logo-symbol">
-            <svg viewBox="0 0 100 100" width="40" height="40" style="color: var(--accent-color);">
-              <path d="M20 30 Q 35 15, 50 30 T 80 30 M20 50 Q 35 35, 50 50 T 80 50 M20 70 Q 35 55, 50 70 T 80 70" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="logo-text" style="text-align: left;">
-            <span class="logo-title" style="font-size: 1.2rem; letter-spacing: 0.15em;">AURAWEAVE</span>
-            <span class="logo-subtitle" style="display: block; font-size: 0.65rem;">FIBER ART STUDIO</span>
-          </div>
-        </a>
-        <h3 class="font-playfair" style="margin-top: 16px; font-size: 1.5rem;">Join the Guild</h3>
-        <p style="color: var(--text-secondary); font-size: 0.9rem;">Register an account to track custom works and lessons.</p>
-      </div>
-
-      <!-- Essential Fields -->
-      <form class="register-form" onsubmit="event.preventDefault(); window.location.href='login.html';">
-        <div class="form-group">
-          <label class="form-label">Full Name</label>
-          <input type="text" required class="form-input" placeholder="Sarah Connor">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Email Address</label>
-          <input type="email" required class="form-input" placeholder="name@domain.com">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Password</label>
-          <input type="password" required class="form-input" placeholder="••••••••">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Confirm Password</label>
-          <input type="password" required class="form-input" placeholder="••••••••">
-        </div>
-        <button type="submit" class="btn btn-primary btn-block" style="margin-top: 8px;">Create Account</button>
-      </form>
-
-      <div class="auth-divider">or sign up with</div>
-
-      <!-- Social Buttons -->
-      <div class="auth-social-buttons">
-        <button class="auth-social-btn" onclick="alert('Continuing with Google...')">
-          <i class="fa-brands fa-google" style="color: #db4437;"></i> Google
-        </button>
-        <button class="auth-social-btn" onclick="alert('Continuing with Facebook...')">
-          <i class="fa-brands fa-facebook-f" style="color: #4267b2;"></i> Facebook
-        </button>
-      </div>
-
-      <!-- Bottom Options -->
-      <div class="auth-footer">
-        Already have an account? <a href="login.html">Log In</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Custom notice container for toasts -->
-  <div id="notice-container" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 12px; pointer-events: none;"></div>
-
-  <!-- Scripts -->
-  <script src="script.js"></script>
+<body>
+  Redirecting to <a href="index.html">Home</a>...
 </body>
 </html>
