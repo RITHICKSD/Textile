@@ -542,6 +542,234 @@ body.dark-theme .sun-icon {
   margin: 0 auto;
 }
 
+/* Ask Cards Grid (Centered, structured spacing) */
+.ask-card-grid {
+  max-width: 1100px;
+  margin: 16px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+  justify-items: stretch;
+}
+
+.ask-card {
+  text-align: left;
+  padding: 20px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.ask-card h4 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.ask-card p {
+  margin-top: 6px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+@media (max-width: 1100px) {
+  .ask-card-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 800px) {
+  .ask-card-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .ask-card-grid { grid-template-columns: 1fr; }
+}
+
+/* Mobile adjustments for Home 2 sections */
+@media (max-width: 768px) {
+  /* Residency: stack selector and detail; show cards one-by-one vertically */
+  .residency-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .residency-selection-panel {
+    flex-direction: column;
+  }
+  .exhibit-card {
+    width: 100%;
+    padding: 12px;
+    gap: 12px;
+    align-items: center;
+  }
+  .exhibit-mini-preview {
+    width: 72px;
+    height: 72px;
+  }
+
+  /* Ask cards: center on mobile with spacing between heading and text */
+  .ask-card-grid {
+    justify-items: center;
+    padding: 0 12px;
+    gap: 14px;
+  }
+  .ask-card {
+    text-align: center;
+    min-height: 140px;
+  }
+  .ask-card h4 { margin-bottom: 8px; }
+  .ask-card p { margin: 0 auto; max-width: 260px; }
+
+  /* Acoustic lab: stack selectors above image panel */
+  .acoustic-lab-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .acoustic-image-panel .acoustic-image-box {
+    flex-direction: column;
+  }
+  .acoustic-image-panel .acoustic-image-box img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Visualizer: stack controls above stage */
+  .visualizer-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .visualizer-stage { order: 2; }
+  .visualizer-controls { order: 1; }
+  .visualizer-stage svg { width: 100%; height: auto; }
+}
+
+/* Mobile-specific login placement: hide header login and style mobile CTA */
+@media (max-width: 768px) {
+  .login-link { display: none !important; }
+  .mobile-login-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-weight: 700;
+    width: calc(100% - 48px);
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 380px) {
+  .mobile-login-btn { width: calc(100% - 36px) !important; padding: 10px 14px !important; }
+}
+
+/* Extra-tight mobile rules for 360px width devices */
+@media (max-width: 380px) {
+  /* Residency cards: stacked, image above text, full-width */
+  .residency-grid { grid-template-columns: 1fr; gap: 16px; }
+  .residency-selection-panel { width: 100%; }
+  .exhibit-card { flex-direction: column; align-items: center; text-align: center; padding: 12px; }
+  .exhibit-mini-preview { width: 100%; height: auto; max-height: 160px; border-radius: 10px; }
+  .exhibit-meta h4 { margin-top: 8px; }
+
+  /* Ensure only one card fits horizontally and spacing is comfortable */
+  .residency-selection-panel { display: flex; flex-direction: column; gap: 14px; }
+
+  /* Ask cards: single column, center text, clear gap between heading and body */
+  .ask-card-grid { grid-template-columns: 1fr; gap: 14px; padding: 0 12px; }
+  .ask-card { text-align: center; padding: 18px; }
+  .ask-card h4 { margin-bottom: 8px; }
+  .ask-card p { margin: 0 auto; max-width: 280px; }
+
+  /* Acoustic lab: ensure selectors sit above and sample image scales properly */
+  .acoustic-lab-grid { grid-template-columns: 1fr; gap: 14px; }
+  .acoustic-image-panel .acoustic-image-box { flex-direction: column; gap: 12px; }
+  .acoustic-image-panel .acoustic-image-box img { width: 100%; height: auto; display: block; }
+  .acoustic-card { padding: 14px; }
+
+  /* Visualizer: stack controls and make SVG responsive in 360 width */
+  .visualizer-grid { grid-template-columns: 1fr; gap: 14px; }
+  .visualizer-stage svg { width: 100%; height: auto; }
+  .visualizer-controls { padding: 0; }
+}
+
+/* Final overrides to ensure mobile rules apply after defaults */
+@media (max-width: 380px) {
+  .residency-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .residency-selection-panel { width: 100% !important; order: 1; }
+  .curatorial-detail-card { order: 2; width: 100% !important; padding: 18px !important; }
+  .exhibit-card { flex-direction: column !important; align-items: center !important; text-align: center !important; transform: none !important; }
+  .exhibit-card:hover, .exhibit-card.active { transform: none !important; }
+
+  .ask-card-grid { grid-template-columns: 1fr !important; width: 100% !important; max-width: 100% !important; padding: 0 12px !important; }
+  .ask-card { width: 100% !important; max-width: 100% !important; box-sizing: border-box; }
+
+  .acoustic-lab-grid { grid-template-columns: 1fr !important; }
+  .acoustic-image-panel .acoustic-image-box { flex-direction: column !important; }
+  .acoustic-image-panel .acoustic-image-box img { width: 100% !important; height: auto !important; }
+
+  .visualizer-grid { grid-template-columns: 1fr !important; }
+  .visualizer-stage svg { width: 100% !important; height: auto !important; }
+
+  /* Reduce heavy paddings on glass cards for small screens */
+  .glass-card { padding: 16px !important; }
+  .section-layout { padding: 40px 0 !important; }
+  .container { padding-left: 12px !important; padding-right: 12px !important; }
+}
+
+/* Additional fixes for tight 360px viewport alignment */
+@media (max-width: 380px) {
+  /* Ensure residency detail panel fits fully inside viewport */
+  .residency-grid { padding-left: 12px; padding-right: 12px; }
+  .curatorial-detail-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    border-radius: var(--radius-md) !important;
+    padding: 14px !important;
+  }
+  .exhibit-card { width: 100% !important; }
+  .exhibit-mini-preview { width: 100% !important; height: 120px !important; object-fit: cover !important; border-radius: 10px !important; }
+
+  /* Center ask cards and remove unexpected offsets */
+  .ask-card-grid { width: calc(100% - 24px) !important; margin: 12px auto !important; padding: 0 !important; }
+  .ask-card { margin: 0 auto !important; max-width: 100% !important; }
+
+  /* Remove any transform/translate that may create overflow */
+  .exhibit-card, .ask-card, .acoustic-card { transform: none !important; }
+}
+
+/* Tight viewport: ensure curator content scales and metrics stack one-per-row */
+@media (max-width: 380px) {
+  .curator-header h3, .curator-badge { font-size: 1rem; }
+  .curator-description { font-size: 0.95rem; line-height: 1.35; margin-top: 8px; }
+  .curator-metrics-grid { display: grid !important; grid-template-columns: 1fr !important; gap: 10px !important; margin-top: 12px; }
+  .metric-item { display: block !important; width: 100% !important; padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.03); }
+  .metric-label { display: block; color: var(--text-secondary); font-size: 0.82rem; margin-bottom: 4px; }
+  .metric-item strong { display: block; font-size: 0.95rem; color: var(--text-primary); }
+}
+
+/* Footer tweaks to align logo like header */
+.main-footer {
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: 36px 0;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 220px 220px;
+  gap: 24px;
+  align-items: start;
+}
+.footer-inner { display:flex; align-items:center; justify-content:space-between; }
+.main-footer .logo-symbol { color: var(--accent-color); }
+.main-footer .logo-text { text-align: left; }
+
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; gap: 14px; align-items: flex-start; }
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -550,10 +778,36 @@ body.dark-theme .sun-icon {
 
 /* --- Section Specific Styling --- */
 
-/* Hero layouts */
-.sec-hero {
+    width: calc(100% - 24px);
+    max-width: 520px;
+    box-sizing: border-box;
   padding-top: 32px !important;
   padding-bottom: 72px !important;
+
+  /* When ask cards are free-floating in section, center the wrapper */
+  .ask-cards-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 24px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 5;
+  }
+}
+
+/* Place ask-cards-wrapper freely inside the section without container constraints on large screens */
+.ask-cards-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 24px;
+}
+
+/* Add icon spacing inside the card */
+.ask-card i {
+  margin-bottom: 6px;
 }
 
 .hero-grid {
@@ -723,8 +977,15 @@ html[dir="rtl"] .hero-actions {
 }
 
 html[dir="rtl"] .editorial-info {
-  align-items: flex-start;
+  align-items: flex-end;
   text-align: right;
+  padding-left: 0;
+  padding-right: 32px;
+}
+
+html[dir="rtl"] .hero-actions,
+html[dir="rtl"] .editorial-info .hero-actions {
+  justify-content: flex-end;
 }
 
 .editorial-heading {
@@ -999,13 +1260,23 @@ html[dir="rtl"] .exhibit-card:hover, html[dir="rtl"] .exhibit-card.active {
 }
 
 .map-tooltip-box {
-  padding: 16px;
+  padding: 18px;
   border-radius: var(--radius-md);
   background-color: var(--bg-secondary);
   border: 1px dashed var(--border-color);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  min-height: 90px;
   color: var(--text-primary);
   transition: var(--transition-smooth);
+}
+
+.map-tooltip-box strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.map-hotspot:hover .pulsing-circle {
+  transform: scale(1.3);
 }
 
 .botanical-dye-lab {
@@ -1471,12 +1742,18 @@ input:checked + .slider-round:before {
 
 .step-item {
   display: flex;
-  gap: 20px;
-  padding: 20px;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 24px 20px;
   border-radius: var(--radius-md);
   cursor: pointer;
   border: 1px solid transparent;
   transition: var(--transition-snappy);
+}
+
+.step-num {
+  min-width: 44px;
+  text-align: center;
 }
 
 .step-item:hover, .step-item.active {
@@ -2017,12 +2294,12 @@ input:checked + .slider-round:before {
 }
 
 .before-img {
-  background-image: url('t2.jpg');
-  filter: sepia(0.3) contrast(1.1);
+  background-image: url('t18.avif');
+  filter: sepia(0.35) contrast(1.08) saturate(0.8);
 }
 
 .after-img {
-  background-image: url('t5.webp');
+  background-image: url('t18.avif');
   clip-path: inset(0 0 0 50%);
 }
 
@@ -2147,6 +2424,14 @@ input:checked + .slider-round:before {
   font-weight: 700;
   font-size: 1.25rem;
   margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.team-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
 }
 
 .team-card h3 {
@@ -2721,6 +3006,21 @@ html[dir="rtl"] .social-icons {
   justify-content: center;
 }
 
+html[dir="rtl"] .main-footer,
+html[dir="rtl"] .footer-info,
+html[dir="rtl"] .footer-links,
+html[dir="rtl"] .footer-legal {
+  text-align: right;
+}
+
+html[dir="rtl"] .footer-links ul {
+  align-items: flex-end;
+}
+
+html[dir="rtl"] .footer-links li {
+  width: fit-content;
+}
+
 /* Logical Properties overrides for safe RTL layout changes */
 .main-header, .logo-container, .nav-list, .header-controls, .hero-grid, .hero-actions, .card-grid, .step-item, .configurator-grid, .palette-selectors, .materiality-split, .hero-split-editorial, .spotlight-grid, .sustain-stat-grid, .footer-grid, .form-row-2, .art-modal-split {
   margin-inline-start: initial;
@@ -3265,9 +3565,14 @@ html[dir="rtl"] .mobile-sub-menu {
 /* Responsive Grid & Breakpoint Styling */
 @media (max-width: 1024px) {
   /* Site sections scaling */
-  .hero-grid, .interactive-split-grid, .configurator-grid, .materiality-split, .spotlight-grid {
+  .hero-grid, .hero-split-editorial, .interactive-split-grid, .configurator-grid, .materiality-split, .spotlight-grid {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+
+  .editorial-carousel-container {
+    max-width: 100%;
+    padding: 0;
   }
 }
 
@@ -3326,11 +3631,29 @@ html[dir="rtl"] .mobile-sub-menu {
   /* RTL Mobile Timeline overrides */
   html[dir="rtl"] .timeline-container::after {
     left: auto !important;
-    right: 24px !important;
+    right: 50% !important;
   }
   html[dir="rtl"] .timeline-item {
     padding-left: 20px !important;
     padding-right: 60px !important;
+    left: auto !important;
+    right: 0 !important;
+  }
+  html[dir="rtl"] .timeline-item:nth-child(odd) {
+    right: 0 !important;
+  }
+  html[dir="rtl"] .timeline-item:nth-child(even) {
+    right: 50% !important;
+  }
+  html[dir="rtl"] .timeline-badge {
+    right: auto !important;
+    left: -24px !important;
+  }
+  html[dir="rtl"] .timeline-item:nth-child(odd) .timeline-badge {
+    left: -24px !important;
+  }
+  html[dir="rtl"] .timeline-item:nth-child(even) .timeline-badge {
+    left: -24px !important;
   }
   html[dir="rtl"] .timeline-badge {
     right: 0 !important;

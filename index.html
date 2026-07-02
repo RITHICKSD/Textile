@@ -26,16 +26,14 @@
       <!-- Left side: Logo -->
       <a href="#" class="logo-container" id="logo-link" onclick="switchView('home1')">
         <div class="logo-symbol">
-          <svg viewBox="0 0 100 100" class="logo-svg" width="40" height="40">
-            <path d="M20 30 Q 35 15, 50 30 T 80 30 M20 50 Q 35 35, 50 50 T 80 50 M20 70 Q 35 55, 50 70 T 80 70" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
-            <line x1="30" y1="15" x2="30" y2="85" stroke="currentColor" stroke-width="2" stroke-dasharray="2 4"/>
-            <line x1="50" y1="15" x2="50" y2="85" stroke="currentColor" stroke-width="2" stroke-dasharray="2 4"/>
-            <line x1="70" y1="15" x2="70" y2="85" stroke="currentColor" stroke-width="2" stroke-dasharray="2 4"/>
+          <svg viewBox="0 0 80 80" class="logo-svg" width="40" height="40" aria-hidden="true">
+            <circle cx="40" cy="40" r="34" fill="none" stroke="currentColor" stroke-width="4" opacity="0.85"/>
+            <path d="M26 54 L34 28 L42 54 M42 28 L50 54" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
           </svg>
         </div>
         <div class="logo-text">
-          <span class="logo-title">AURAWEAVE</span>
-          <span class="logo-subtitle">FIBER ART STUDIO</span>
+          <span class="logo-title">AuraWeave</span>
+          <span class="logo-subtitle">Fiber Art Studio</span>
         </div>
       </a>
 
@@ -68,6 +66,9 @@
 
       <!-- Right side: Controls -->
       <div class="header-controls" id="header-control-panel">
+        <!-- Login Button -->
+        <a href="login.html" class="btn btn-sm btn-outline login-link">Login</a>
+
         <!-- Dark/Light Theme Toggle -->
         <button class="control-btn theme-toggle-btn" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Dark/Light Theme">
           <i class="fa-solid fa-moon moon-icon"></i>
@@ -125,8 +126,11 @@
           <li class="mobile-nav-item">
             <a href="#" class="mobile-nav-link" onclick="switchView('contact'); toggleMobileMenu();">Contact</a>
           </li>
-
         </ul>
+
+        <div class="mobile-login-cta" style="display:flex;justify-content:center;padding:12px 0 6px;">
+          <a href="login.html" class="btn btn-primary mobile-login-btn" onclick="toggleMobileMenu()">Login</a>
+        </div>
 
         <div class="mobile-menu-divider"></div>
 
@@ -195,7 +199,7 @@
           <div class="card-grid">
             <div class="art-card" onclick="openInteractiveDetail('Earthy Horizons', 'A dramatic multi-textured hanging utilizing raw organic wool, botanical dyes, and hand-spun jute. Features custom brass hanging bars.')">
               <div class="art-card-img">
-                <img src="t1.webp" alt="Earthy Horizons Woven Tapestry" style="width: 100%; height: 100%; object-fit: cover;">
+                <img src="C1.jpg" alt="Earthy Horizons Woven Wall Hanging" style="width: 100%; height: 100%; object-fit: cover;">
                 <div class="card-tag">Collection A</div>
               </div>
               <div class="art-card-details">
@@ -209,7 +213,7 @@
             </div>
             <div class="art-card" onclick="openInteractiveDetail('Monochrome Drift', 'Minimalist architectural installation emphasizing shadow, contrast, and dense pile textures. Woven with thick hand-felted roving.')">
               <div class="art-card-img">
-                <img src="t2.jpg" alt="Monochrome Drift Woven Tapestry" style="width: 100%; height: 100%; object-fit: cover;">
+                <img src="C2.jpg" alt="Monochrome Drift Woven Wall Hanging" style="width: 100%; height: 100%; object-fit: cover;">
                 <div class="card-tag">Collection B</div>
               </div>
               <div class="art-card-details">
@@ -223,7 +227,7 @@
             </div>
             <div class="art-card" onclick="openInteractiveDetail('Geometric Solstice', 'Modern geometric color blocking combined with intricate plain weave overlays and long organic cotton fringes.')">
               <div class="art-card-img">
-                <img src="t5.webp" alt="Geometric Solstice Woven Tapestry" style="width: 100%; height: 100%; object-fit: cover;">
+                <img src="C3.jpg" alt="Geometric Solstice Wall Hanging" style="width: 100%; height: 100%; object-fit: cover;">
                 <div class="card-tag">Collection C</div>
               </div>
               <div class="art-card-details">
@@ -426,7 +430,7 @@
           <div class="materiality-split">
             <div class="yarn-graphics animate-slide-in">
               <div class="yarn-visual-container" style="padding: 0; overflow: hidden; border: none; background: none;">
-                <img src="t15.webp" alt="Sustainably Spun Botanical Yarns" style="width: 100%; height: 350px; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--glass-shadow); border: 1px solid var(--border-color);">
+                <img src="t19.jpg" alt="Sustainably Spun Botanical Yarns" style="width: 100%; height: 350px; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--glass-shadow); border: 1px solid var(--border-color);">
               </div>
             </div>
             
@@ -513,7 +517,7 @@
                 </div>
               </div>
               <div class="exhibit-card" onclick="selectExhibitionItem(2, this)">
-                <img src="t14.jpg" alt="Tectonic Plates" class="exhibit-mini-preview" style="object-fit: cover;">
+                <img src="t20.jpeg" alt="Tectonic Plates" class="exhibit-mini-preview" style="object-fit: cover;">
                 <div class="exhibit-meta">
                   <h4>Tectonic Plates</h4>
                   <span>Piece 02/03</span>
@@ -563,62 +567,28 @@
             <p class="section-desc">Click origins on the map to trace fiber coordinates, then test natural dye ingredients in our interactive lab.</p>
           </div>
 
-          <div class="dye-lab-split-grid">
-            <!-- Sourcing Map (Left Column) -->
-            <div class="interactive-map-box glass-card">
-              <h3 class="dye-lab-title"><i class="fa-solid fa-map-location-dot"></i> Sourcing Map</h3>
-              <div class="vector-map-wrapper">
-                <svg viewBox="0 0 800 400" width="100%" height="auto" class="vector-world-map">
-                  <rect width="100%" height="100%" fill="var(--bg-secondary)" rx="12"/>
-                  <!-- Continents Outline -->
-                  <path d="M120 120 Q 180 80, 200 120 T 160 260 T 100 300 Z" fill="var(--bg-tertiary)" opacity="0.6"/>
-                  <path d="M350 100 Q 420 80, 480 140 T 520 280 T 440 320 Z" fill="var(--bg-tertiary)" opacity="0.6"/>
-                  <!-- Sourcing Hotspots -->
-                  <g class="map-hotspot" onclick="showMapTooltip('Peruvian Highlands', 'Ultra-soft Merino Wool, hand-spun by a women-led collective in Peru.')" transform="translate(160, 220)">
-                    <circle r="10" fill="var(--accent-color)" class="pulsing-circle"/>
-                    <circle r="5" fill="#fff"/>
-                  </g>
-                  <g class="map-hotspot" onclick="showMapTooltip('Flanders Fields, Belgium', 'Heavy-weight linen yarn, grown organically and combed for maximum lustre.')" transform="translate(420, 110)">
-                    <circle r="10" fill="var(--accent-color)" class="pulsing-circle"/>
-                    <circle r="5" fill="#fff"/>
-                  </g>
-                  <g class="map-hotspot" onclick="showMapTooltip('Varanasi, India', 'Eco-friendly recycled silk yarn, collected from saree manufacturing surpluses.')" transform="translate(560, 180)">
-                    <circle r="10" fill="var(--accent-color)" class="pulsing-circle"/>
-                    <circle r="5" fill="#fff"/>
-                  </g>
-                </svg>
-              </div>
-              <div class="map-tooltip-box" id="map-tooltip">
-                <strong>Click a pulsing hotspot on the map</strong> to query yarn sourcing and properties.
-              </div>
-            </div>
+          <!-- Removed cover "Ask Our Sourcing Team" glass-card so the ask-cards sit freely in the section -->
+        </div>
+        <!-- Ask cards placed free within the section (not inside .container) -->
+        <div class="ask-cards-wrapper">
+          <div class="ask-card-grid">
+            <button class="ask-card glass-card" onclick="openInteractiveDetail('Where are our fibers sourced?', 'We source from vetted cooperatives in Peru, Belgium, and India. Tell us what material you need and we will share origin reports and producer profiles.')">
+              <i class="fa-solid fa-map-location-dot" style="font-size:1.15rem;color:var(--accent-color);"></i>
+              <h4>Where are our fibers sourced?</h4>
+              <p>Origin reports, community partners, and producer profiles.</p>
+            </button>
 
-            <!-- Dye Lab (Right Column) -->
-            <div class="botanical-dye-lab glass-card">
-              <h3 class="dye-lab-title"><i class="fa-solid fa-flask"></i> Botanical Dye Lab</h3>
-              <p class="dye-lab-desc">Select an organic dyestuff to dye our wool bundle on the rack:</p>
-              
-              <div class="dye-lab-selectors">
-                <button class="dye-lab-btn active" onclick="updateDyeLab('Indigo Leaf', '#3d5a80', 'Produces a deep, organic navy blue. Historically used in protective talismans.')">Indigo</button>
-                <button class="dye-lab-btn" onclick="updateDyeLab('Madder Root', '#c96b4c', 'Yields rich terracotta and red hues. Harvested from our organic test garden.')">Madder Root</button>
-                <button class="dye-lab-btn" onclick="updateDyeLab('Marigold Petals', '#d79c5c', 'Yields glowing gold and sunshine yellow tones. Naturally repels wool insects.')">Marigold</button>
-                <button class="dye-lab-btn" onclick="updateDyeLab('Oak Galls', '#60524c', 'Creates complex deep brown and dark grey shades. Rich in protective tannic acid.')">Oak Galls</button>
-              </div>
+            <button class="ask-card glass-card" onclick="openInteractiveDetail('Certification & Sustainability', 'We provide organic certification records, GOTS-related notes, and sustainability summaries for each lot. Request a lab report or supply chain trace.')">
+              <i class="fa-solid fa-certificate" style="font-size:1.15rem;color:var(--accent-color);"></i>
+              <h4>Certification & Sustainability</h4>
+              <p>Request certificates and lifecycle summaries.</p>
+            </button>
 
-              <div class="dye-lab-visual-box">
-                <svg viewBox="0 0 200 160" width="100%" height="150" class="dye-skein-svg">
-                  <!-- Skein representation -->
-                  <g id="dye-lab-skein">
-                    <ellipse cx="100" cy="80" rx="28" ry="60" fill="none" stroke="#3d5a80" stroke-width="12" id="skein-color-1" class="dye-transition"/>
-                    <ellipse cx="100" cy="80" rx="16" ry="55" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="6" id="skein-color-2" class="dye-transition"/>
-                    <rect x="75" y="70" width="50" height="20" fill="var(--text-primary)" rx="4"/>
-                  </g>
-                </svg>
-                <div class="dye-fact-box" id="dye-fact-text">
-                  <strong>Indigo Leaf:</strong> Produces a deep, organic navy blue. Historically used in protective talismans.
-                </div>
-              </div>
-            </div>
+            <button class="ask-card glass-card" onclick="openInteractiveDetail('Custom Dye Recipes', 'Our botanical dye lab develops small-batch recipes using indigo, madder, marigold and locally sourced tannins. Ask for recipe sheets and color samples.')">
+              <i class="fa-solid fa-flask" style="font-size:1.15rem;color:var(--accent-color);"></i>
+              <h4>Custom Dye Recipes</h4>
+              <p>Small-batch botanical formulas on request.</p>
+            </button>
           </div>
         </div>
       </section>
@@ -648,21 +618,23 @@
               </div>
             </div>
 
-            <div class="glass-card frequency-test-panel">
-              <div class="panel-header">
-                <h4>Frequency Deflection Test</h4>
+            <div class="glass-card acoustic-image-panel">
+              <div class="panel-header" style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+                <h4 style="margin:0">Acoustic Sample</h4>
                 <span class="acoustic-rating-badge" id="acoustic-nrc-label">NRC 0.70</span>
               </div>
-              
-              <div class="frequency-viz-box">
-                <!-- SVG animated wave mimicking frequency waves flattening out -->
-                <svg viewBox="0 0 400 120" width="100%" height="120" class="freq-svg">
-                  <!-- Wave lines -->
-                  <path d="M 0 60 Q 25 10, 50 60 T 100 60 T 150 60 T 200 60 T 250 60 T 300 60 T 350 60 T 400 60" fill="none" stroke="var(--accent-color)" stroke-width="3" id="freq-wave-1" class="wave-path"/>
-                  <path d="M 0 60 Q 25 90, 50 60 T 100 60 T 150 60 T 200 60 T 250 60 T 300 60 T 350 60 T 400 60" fill="none" stroke="var(--accent-gold)" stroke-width="2" id="freq-wave-2" class="wave-path"/>
-                </svg>
+
+              <div class="acoustic-image-box" style="margin-top:12px; display:flex; gap:12px; align-items:flex-start;">
+                <div style="flex:1; min-height:220px; overflow:hidden; border-radius:8px; border:1px solid var(--border-color);">
+                  <img id="acoustic-sample-img" src="bas.jpg" alt="Acoustic sample image" style="width:100%; height:100%; object-fit:cover; display:block;">
+                </div>
+                <div style="width:260px;">
+                  <p class="acoustic-description" id="acoustic-pattern-desc">Flat interwoven pattern providing moderate sound dampening suitable for residential dining spaces.</p>
+                  <div style="margin-top:12px;">
+                    <button class="btn btn-sm btn-outline" onclick="openInteractiveDetail('Request Technical Data', 'Contact our lab for acoustic test reports and installation guidelines.')">Request Data</button>
+                  </div>
+                </div>
               </div>
-              <p class="acoustic-description" id="acoustic-pattern-desc">Flat interwoven pattern providing moderate sound dampening suitable for residential dining spaces.</p>
             </div>
           </div>
         </div>
@@ -891,19 +863,19 @@
           </div>
           <div class="card-grid">
             <div class="team-card glass-card">
-              <div class="team-avatar">CG</div>
+              <div class="team-avatar"><img src="f1.avif" alt="Studio founder portrait"></div>
               <h3>Clara Gable</h3>
               <span>Founder & Principal Weaver</span>
               <p>Expertise: Large scale botanical dye-work and geometric wall hangings. Clara has woven for over 20 years.</p>
             </div>
             <div class="team-card glass-card">
-              <div class="team-avatar">LN</div>
+              <div class="team-avatar"><img src="male1.avif" alt="Lead woodcraft specialist portrait"></div>
               <h3>Liam Novak</h3>
               <span>Lead Woodcraft & Loom Tech</span>
               <p>Expertise: Custom loom manufacturing and structural timber frame construction. Liam manages installations.</p>
             </div>
             <div class="team-card glass-card">
-              <div class="team-avatar">ES</div>
+              <div class="team-avatar"><img src="male2.avif" alt="Yarn dye specialist portrait"></div>
               <h3>Eva Sterling</h3>
               <span>Yarn Dyer & Fiber Specialist</span>
               <p>Expertise: Botanical dye extraction, mordant chemistry, and spinning wool roving. Eva leads workshops.</p>
@@ -943,7 +915,7 @@
               </div>
             </div>
             <div class="space-visual-frame" style="height: 320px; overflow: hidden; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--glass-shadow);">
-              <img src="t17.webp" alt="The Dye Kitchen Space" id="space-tour-img" style="width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease;">
+              <img src="st.webp" alt="The Studio Virtual Tour" id="space-tour-img" style="width: 100%; height: 100%; object-fit: cover; transition: all 0.5s ease;">
             </div>
           </div>
         </div>
@@ -977,7 +949,7 @@
               <button class="btn btn-primary" onclick="scrollToElement('h1-commissions')">Commission Estimator</button>
             </div>
             <div class="service-image-container" style="height: 320px; overflow: hidden; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--glass-shadow);">
-              <img src="t12.jpg" alt="Bespoke Commission Weaving" style="width: 100%; height: 100%; object-fit: cover;">
+              <img src="corp.jpg" alt="Residential and Corporate Commission" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
           </div>
         </div>
@@ -988,7 +960,7 @@
         <div class="container">
           <div class="service-split-grid" style="grid-template-columns: 0.85fr 1.15fr;">
             <div class="service-image-container" style="height: 320px; overflow: hidden; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--glass-shadow);">
-              <img src="t4.jpg" alt="Educational Weaving Class" style="width: 100%; height: 100%; object-fit: cover;">
+              <img src="wclass.jpg" alt="Weaving Class" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
             <div class="service-text">
               <span class="subheading">Learn Weaving</span>
@@ -1028,15 +1000,13 @@
       <!-- Section 5: Corporate Partnerships -->
       <section id="srv-corporate" class="section-layout">
         <div class="container">
-          <div class="service-split-grid">
+          <div class="service-split-grid" style="grid-template-columns: 1fr; gap: 0;">
             <div class="service-text">
               <span class="subheading">Corporate & Hospitality</span>
-              <h2 class="font-playfair" style="font-size: 2.2rem; margin-bottom: 16px;">Hospitality & Architect Licenses</h2>
-              <p style="color: var(--text-secondary); margin-bottom: 24px;">Provide warmth to hotel lobbies, guest rooms, and offices. We offer wholesale production of curated designs and flame-retardant fiber certifications for corporate safety compliance.</p>
+              <h2 class="font-playfair" style="font-size: 2.2rem; margin-bottom: 16px;">Hospitality & Architectural Licensing</h2>
+              <p style="color: var(--text-secondary); margin-bottom: 20px;">We support hospitality designers, developers, and architects with fully licensed textile solutions that meet fire, acoustic, and sustainability standards.</p>
+              <p style="color: var(--text-secondary); margin-bottom: 24px;">Expect complete documentation, flame-retardant certifications, and production-ready specifications for large-scale hotel, resort, lobby, and office installations.</p>
               <button class="btn btn-primary" onclick="switchView('contact')">Request Hospitality Catalog</button>
-            </div>
-            <div class="service-image-container" style="height: 320px; overflow: hidden; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--glass-shadow);">
-              <img src="t3.webp" alt="Corporate Tapestry Showcase" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
           </div>
         </div>
@@ -1047,7 +1017,7 @@
         <div class="container">
           <div class="service-split-grid" style="grid-template-columns: 0.85fr 1.15fr;">
             <div class="service-image-container" style="height: 320px; overflow: hidden; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--glass-shadow);">
-              <img src="t8.webp" alt="Floor Loom and Studio Spaces" style="width: 100%; height: 100%; object-fit: cover;">
+              <img src="rent.jpg" alt="Studio and Floor Loom Rentals" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
             <div class="service-text">
               <span class="subheading">Studio Rentals</span>
@@ -1253,11 +1223,9 @@
       <div class="footer-info">
         <a href="#" class="logo-container" onclick="switchView('home1')" style="margin-bottom: 20px; display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
           <div class="logo-symbol">
-            <svg viewBox="0 0 100 100" class="logo-svg" width="40" height="40">
-              <path d="M20 30 Q 35 15, 50 30 T 80 30 M20 50 Q 35 35, 50 50 T 80 50 M20 70 Q 35 55, 50 70 T 80 70" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
-              <line x1="30" y1="15" x2="30" y2="85" stroke="currentColor" stroke-width="2" stroke-dasharray="2 4"/>
-              <line x1="50" y1="15" x2="50" y2="85" stroke="currentColor" stroke-width="2" stroke-dasharray="2 4"/>
-              <line x1="70" y1="15" x2="70" y2="85" stroke="currentColor" stroke-width="2" stroke-dasharray="2 4"/>
+            <svg viewBox="0 0 80 80" class="logo-svg" width="36" height="36" aria-hidden="true">
+              <circle cx="40" cy="40" r="34" fill="none" stroke="currentColor" stroke-width="4" opacity="0.85"/>
+              <path d="M26 54 L34 28 L42 54 M42 28 L50 54" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
             </svg>
           </div>
           <div class="logo-text" style="text-align: left;">

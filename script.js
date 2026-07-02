@@ -314,7 +314,23 @@ function showMapTooltip(title, text) {
   const tooltip = document.getElementById("map-tooltip");
   if (!tooltip) return;
 
-  tooltip.innerHTML = `<strong>${title}</strong>: ${text}`;
+  // Update richer map info panel (image + text)
+  const imgEl = document.getElementById('map-info-img');
+  const titleEl = document.getElementById('map-info-title');
+  const textEl = document.getElementById('map-info-text');
+
+  if (titleEl) titleEl.textContent = title;
+  if (textEl) textEl.textContent = text;
+  if (imgEl) {
+    // Choose an illustrative image per hotspot
+    const key = title.toLowerCase();
+    if (key.includes('peru') || key.includes('peruvian')) imgEl.src = 't19.jpg';
+    else if (key.includes('belgium') || key.includes('flanders')) imgEl.src = 't12.jpg';
+    else if (key.includes('india') || key.includes('varanasi')) imgEl.src = 't6.jpg';
+    else imgEl.src = 't2.jpg';
+  }
+
+  // Visual emphasis
   tooltip.style.borderColor = "var(--accent-color)";
   tooltip.style.backgroundColor = "var(--accent-soft)";
 
@@ -432,6 +448,57 @@ function selectAcousticWeave(pattern, rating, description, type, element) {
       wave1.setAttribute("d", "M 0 60 L 400 60");
       wave2.setAttribute("d", "M 0 60 L 400 60");
     }
+  }
+
+  showNoticeToast(`Acoustic Test: Applied ${pattern} frequency absorption`);
+}
+
+// Update acoustic sample image when a weave pattern is selected
+const acousticImageMap = {
+  plain: 'bas.jpg',
+  twill: 'twil.jpg',
+  tufted: 'tuft.jpg'
+};
+
+// Enhance selectAcousticWeave to switch sample image when available
+const _orig_selectAcousticWeave = selectAcousticWeave;
+function selectAcousticWeave(pattern, rating, description, type, element) {
+  // Call original behavior (which is now defined above)
+  // update visuals and description
+  // (we replicate the core logic here to avoid execution order issues)
+  const nrcLabel = document.getElementById("acoustic-nrc-label");
+  const descEl = document.getElementById("acoustic-pattern-desc");
+  const wave1 = document.getElementById("freq-wave-1");
+  const wave2 = document.getElementById("freq-wave-2");
+
+  // Highlight selected card
+  const cards = document.querySelectorAll(".acoustic-card");
+  cards.forEach(c => c.classList.remove("active"));
+  if (element) element.classList.add("active");
+
+  if (nrcLabel) nrcLabel.textContent = rating;
+  if (descEl) descEl.textContent = description;
+
+  // Animate frequencies based on density (best-effort; may be no-op if SVG removed)
+  if (wave1 && wave2) {
+    if (type === 'plain') {
+      wave1.setAttribute("d", "M 0 60 Q 25 10, 50 60 T 100 60 T 150 60 T 200 60 T 250 60 T 300 60 T 350 60 T 400 60");
+      wave2.setAttribute("d", "M 0 60 Q 25 90, 50 60 T 100 60 T 150 60 T 200 60 T 250 60 T 300 60 T 350 60 T 400 60");
+    } else if (type === 'twill') {
+      wave1.setAttribute("d", "M 0 60 Q 25 35, 50 60 T 100 60 T 150 60 T 200 60 T 250 60 T 300 60 T 350 60 T 400 60");
+      wave2.setAttribute("d", "M 0 60 Q 25 85, 50 60 T 100 60 T 150 60 T 200 60 T 250 60 T 300 60 T 350 60 T 400 60");
+    } else if (type === 'tufted') {
+      wave1.setAttribute("d", "M 0 60 L 400 60");
+      wave2.setAttribute("d", "M 0 60 L 400 60");
+    }
+  }
+
+  // Swap the acoustic sample image if available
+  const sampleImg = document.getElementById('acoustic-sample-img');
+  if (sampleImg) {
+    const newSrc = acousticImageMap[type] || acousticImageMap['plain'];
+    sampleImg.src = newSrc;
+    sampleImg.alt = pattern + ' sample';
   }
 
   showNoticeToast(`Acoustic Test: Applied ${pattern} frequency absorption`);
